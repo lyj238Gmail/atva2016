@@ -138,7 +138,7 @@ checking \cite{McMillan2001} to the verification of FLASH by using Candence-SMV 
 %since invariant information is obtained by model checking abstract systems. McMillan
 use the Candence-SMV  proof assistant [McM99] to verify both safety and liveness of the
 FLASH protocol. Despite the fact SMV is designed as a model-checker to automatically checking properties, the core techniques for FLASH parameterized verification adopted by Mcmillan is SMV's advanced features for proof such as composition proof and temporal case splitting, and abstraction. Human interaction must be heavily relied on to  guide SMV to work, depending on his deep insight to FLASH. Unlike general theorem prover like Isabelle, SMV does not have a good logical foundation to perform theroem proving because its initial design philosphy is based on state enumerating. The above proofs are neither rigorous as a theorem prover, nor easily understood to a non-specialist of SMV.  Because these proof techniques is only special for SMV,  they are  difficult to be generalized to other protocols.
-f
+
 The CMP method, which adopts parameter abstraction and guard strengthening, is proposed
 in~\cite{Chou2004} for verifying a safety property $inv$ of
 a parameterized system.
