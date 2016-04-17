@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{FLASHCache}
 Kuskin, J., Ofelt, D., Heinrich, M., Heinlein, J., Simoni, R., Gharachorloo,
@@ -47,6 +47,20 @@ Conchon, S., Goel, A., Krstic, S., Mebsout, A., Zaidi, F.:
 \newblock Invariants for finite instances and beyond.
 \newblock In: Formal Methods in Computer-Aided Design (FMCAD), 2013. (Oct 2013)
    61--68
+
+\bibitem{Arons2001}
+Arons, T., Pnueli, A., Ruah, S., Xu, Y., Zuck, L.:
+\newblock Parameterized verification with automatically computed inductive
+  assertions?
+\newblock In: Proc.\ 13th International Conference on Computer Aided
+  Verification. Volume 2102 of LNCS.
+\newblock Springer (2001)  221--234
+
+\bibitem{Lv2007}
+Lv, Y., Lin, H., Pan, H.:
+\newblock Computing invariants for parameter abstraction.
+\newblock In: Proc.\ the 5th IEEE/ACM International Conference on Formal
+  Methods and Models for Codesign, IEEE CS (2007)  29--38
 
 \bibitem{Pnueli2001}
 Pnueli, A., Ruah, S., Zuck, L.:

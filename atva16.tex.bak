@@ -179,13 +179,13 @@ steps  but also the theory developed in a theorem
 prover, so that we can have a completely formal proof". Therefore it is preferable to  have a completely formal proof for verification of FLASH in a well-known theorem prover. Previous work is too far away from giving a formal proof for FLASH. Even for a moderate case GERMAN protocol, which is much simpler than FLASH, no formal proof is not available yet. Let alone FLASH.
 
 
-The aim of this paper is to apply {\sf paraVerifier} to a  parameterized verification of FLASH protocol in both an automatical and rigorous way. In detail, 
+The aim of this paper is to apply {\sf paraVerifier} to a  parameterized verification of FLASH protocol in both an automatical and rigorous way. In detail,
 \begin{itemize}
 \item Interesting auxiliary invariants can be found by {\sf paraVerifier} automatically. Our invariants are visible, which can characterize the semantical features of FLASH, and help people to precisely understand the design of   FLASH.
 
 \item With the help of {\sf paraVerifier}, a formal proof can be constructed automatically as a product of a parameterized verification of FLASH. The formal proof script not  only models the protocol rigorously and specifies its properties without any ambiguity, but also proves them mechanically in the theorem prover. Therefore, it helps us to achieve the highest possible assurance for the correctness of FLASH.
-    
-   
+
+
 \end{itemize}
 
 The organization of this work is as follows: Section \ref{sec:Preliminaries} introduces the background of {\sf paraVerifier}; Section  \ref{sec:informalOfFLASH} introduces informally FLASH protocol; Section \ref{sec:formalDescription} introduces our FLASH model in Murphi\cite{Dill1996}; Section \ref{sec:experiments} shows our verification experiments in detail. Especially we introduce some advanced techniques used in our experiments: oracles of simplified version and hybrid oracles, and distributing oracles. Section \ref{sec:relatingWithFlow} tries to explain meanings of inductive invariants with flows.  Section \ref{sec:conclusion} concludes our work.
@@ -230,7 +230,8 @@ a Murphi  file {\tt prot.m}, is compiled into an internal form {\sf prot.ml}, th
 
 
 \section{Informal Account of FLASH Protocol\label{sec:informalOfFLASH}}
-Here we directly adopt the material in \cite{Park2000} to informally introduce FLASH protocol.
+\subsection{A textual description} 
+Firstly we give a classical textual description, which is directly cited from the material in \cite{Park2000} to informally introduce FLASH protocol.
 FLASH protocols is a directory-based one which supports a large number of distributed processing nodes. Each cache line-sized block in memory is associated with directory header which keeps information about the line. Each memory address has a home node. Each cache line-sized block in memory is associated
 with a directory header which keeps information about the line. For a memory line, the
 node on which that piece of memory is physically located is called the home; the other
@@ -239,7 +240,7 @@ its main memory in the corresponding directory headers.
 The system consists of a set of nodes, each of which contains a processor, caches, and
 a portion of the global memory. The distributed nodes communicate using asynchronous
 messages through a point-to-point network. The state of a cached copy is in either invalid,
-shared (readable), or exclusive (readable and writable). There are typical kinds of transaction flows as follows:
+shared (readable), or exclusive (readable and writable). There are typical kinds of transactions as follows:
 
 \begin{description}
 \item[READ-Transaction]
@@ -297,12 +298,54 @@ exclusive and proceeds to write.
 %and the directory properly.
 
 %
-Usually, the above informal paper account of
-\begin{description}
-\item[(1)]  In most previous papers on FLASH, only informal accounts as shown above are discussed. It is still not very clear to most readers, especially to the novel who are not very familiar with FALSH. Its is very desirable for people to have some flow-charts each of  which is a series of rules executed to complete a READ/WRITE transaction. From such a flow, how rules are executed in some special causal order to finish a transaction? How do transactions of different nodes are synchronized with some mechanism to guarantee  the consistency property?
 
-\item[(2)] It is preferable to combine steps in a flow with auxiliary inductive invariants. From this we can make it clear that how key state variables in the directory of FLASH guarantee the synchronization between different nodes. Formally, auxiliary inductive invariants will show    the synchronization mechanism in logical formulas.
- \end{description}
+Usually, only an informal  account of FLASH is provided in most previous work as shown in the above paragraph.   It is still not very clear to most readers, especially to the novel who are not very familiar with FLASH. Its is very desirable for people to have some flow-charts each of  which is a series of rules executed to complete a READ/WRITE transaction. From such a flow, who execute transition rules and exchange messages to implement the designed protocol goals. How rules are executed in some special causal order to finish a transaction? How do transactions of different nodes are synchronized with some mechanism to guarantee  important properties? Here we adopt a novel data flow chart to illustrate a case of READ (or WRITE) transaction, as shown below:
+
+
+
+\subsection{Flow}
+ Formally, a transaction flow is a structure, which can be formalized by pair $<R \times N, \rightarrow \cup \Rightarrow>$, where $(r,i) \in R \times N$ is a  node, indicating an client $i$ performs an action of executing a rule $r$. Relations  $\rightarrow$  and $\Rightarrow$ are two   orders over $R \times N$. $(r_1,i_1) \rightarrow (r_2,i_2) \equiv \exists v~e. (v:=e) \in \mathsf{act}(r_1) \land (v=e) \in decompose(guard(r_2))$. Here $v:=e$ is an assignment; $\mathsf{act}$ is the set of assignments of an action of a rule; A formula $f$ in conjunction form can be composed into a set of sub-formulas $f_i$, denoted as $decompose(f)$, such that each $f_i$ is not of a conjunction form and $f$ is semantically equivalent to $f_1 \land f_2 \land ... \land f_N$. Intuitively $(r_1,i_1) \rightarrow (r_2,i_2)$ means that the triggering of agent $i_2$ executing $r_2$ needs the completion of agent $i_1$ executing $r_1$; $(r_1,i_1) \Rightarrow (r_2,i_1)$ means that agent $i_1$'s action of executing $r_2$ follows the completion of  executing $r_1$. A classical three-hop flow case of a READ-transaction is shown as follows:
+
+
+\begin{figure}[htbp]
+\centering %
+%\vspace{-0.8cm}
+\includegraphics[width=1\textwidth]{flow2.pdf}
+
+\caption{The flow of READ-transaction involving sharing-write back\label{fig:arch}
+}
+\end{figure}
+
+
+This flow is finished by the following steps:
+\begin{enumerate}
+\item An idle remote  client $src$ needs a shared copy of a memory line, executes   rule PI\_Remote\_Get, and  sends the GET request to home.
+
+\item  When the GET request from $src$ arrives at the
+home, the home consults the directory to find that the line is dirty in $dst$,  executes rule NI\_Lcal\_Get\_Get: forwards the GET to $dst$ by telling that $src$ needs the data, and sets Dir.Pending TRUE to make no any other node's request to be processed during the sharing write-back procedure.
+
+\item  When $dst$ receives the forwarded GET, the
+processor $dst$ executes rule \\
+NI\_Remote\_Get\_Put, sets its copy to shared state and issues a PUT to $src$ conveying the dirty data,  and  issues a   shwb\_shwb
+ (sharing write-back) conveying the dirty data at the same time.
+
+\item   When $home$ receives this SHWB message, it executes the rule NI\_ShWb, and 
+ writes the received
+data back to main memory and puts $src$ on the sharer list.
+
+\item When $dst$ receives this PUT message, it executes the rule NI\_Remote\_Put. If there is not another INV message, then it   uses the received data to update its cache line, and sets its cache to shared state.
+
+
+\end{enumerate}
+
+Compared with a textual description, a flow description has the advantage that (1) causal order relations between agents' executing rules are illustrated clearly; (2) communications between agents are also illustrated. In section \ref{sec:experiments} and \ref{sec:relatingWithFlow} we combine steps in a flow with auxiliary inductive invariants, by which we can make it clear that how  FLASH guarantee the synchronization between different clients. Formally, auxiliary inductive invariants will show    the synchronization mechanism in logical formulas.
+
+%Usually, the above informal paper account of
+%\begin{description}
+%\item[(1)]  In most previous papers on FLASH, only informal accounts as shown above are discussed. It is still not very clear to most readers, especially to the novel who are not very familiar with FALSH. Its is very desirable for people to have some flow-charts each of  which is a series of rules executed to complete a READ/WRITE transaction. From such a flow, how rules are executed in some special causal order to finish a transaction? How do transactions of different nodes are synchronized with some mechanism to guarantee  the consistency property?
+
+%\item[(2)] It is preferable to combine steps in a flow with auxiliary inductive invariants. From this we can make it clear that how key state variables in the directory of FLASH guarantee the synchronization between different nodes. Formally, auxiliary inductive invariants will show    the synchronization mechanism in logical formulas.
+% \end{description}
 
 
 
@@ -416,12 +459,12 @@ The former two properties are the mutual-exclusion properties between  cache sta
 
 %=========================================
 \section{Verifying FLASH by {\sf paraVerifer} \label{sec:experiments}}
-For cache coherence protocols like MESI or German protocols with small scales,   {\sf paraVerifier}  is easy to use to verify automatically them. A Murphi file is only provided as a formal model, which contain both the protocol and properties under verification. The Murphi model will be automatically transformed into not only an internal model, but also a SMV-smodel. NuSmv will be called to compute the reachable set of the SMV-model. The internal model will be used by the {\sf invFinder} to generate auxiliary invariants. During this generation procedure, a set of candidate invariant formulas are generated in one step, and only one is chosen  if it is an invariant by checking the reachable set of   SMV-model. The oracle of the SMV-model is automatically generated inside the {\sf inVfinder} without human intervention.
+For cache coherence protocols like MESI or German protocols with small scales,   {\sf paraVerifier}  is easy to use to verify automatically them. A Murphi file is only provided as a formal model, which contain both the protocol and properties under verification. The Murphi model will be automatically transformed into not only an internal model, but also a SMV-smodel. NuSMV will be called to compute the reachable set of the SMV-model. The internal model will be used by the {\sf invFinder} to generate auxiliary invariants. During this generation procedure, a set of candidate invariant formulas are generated in one step, and only one is chosen  if it is an invariant by checking the reachable set of   SMV-model. The oracle of the SMV-model is automatically generated inside the {\sf inVfinder} without human intervention.
 
-However, FLASH with data path is a real world protocol with industry scale. For a FLASH   instance configuration size NODENUM=3 ana DATANUM=2, the protocol is so complex that NuSmv can't compute the reachable state set of the SMV-model which is generated by {\sf invFinder} in a computing server with ?. In fact, this problem of  state explosion is the main obstacle to the applying previous automatical solutions such as \cite{} to the parameterized verification of FLASH. For instance, a reachable state set of a protocol instance of FLASH is need in both the work in \cite{} and that in \cite{}. The former needs the reachable state set to compute the so-called ``invisible inductive invariants" for deductive theorem proving. The latter needs it to strengthen
+However, FLASH with data path is a real world protocol with industry scale. For a FLASH   instance configuration size NODENUM=3 ana DATANUM=2, the protocol is so complex that NuSMV can't compute the reachable state set of the SMV-model which is generated by {\sf invFinder} in a computing server with ?. In fact, this problem of  state explosion is the main obstacle to the applying previous automatical solutions such as \cite{Arons2001,Lv2007} to the parameterized verification of FLASH. For instance, a reachable state set of a protocol instance of FLASH is need in both the work in \cite{Arons2001,Lv2007}. The former needs the reachable state set to compute the so-called ``invisible inductive invariants" for deductive theorem proving. The latter needs it to strengthen
  the guards of rule for an counter-example guided refinement of an abstract protocol. Due to the non-availability of the necessary the reachable state set of a proper instance of FLASH, the above two approach both fail.
 
- In order to overrun the obstacle of oracles, {\sf invFinder} provides techniques of simplifying protocols and hybrid oracles. For a complex protocol, a smv-model of a  simplified version of this protocol can be used as an external oracle to verify the guessed candidate formulas. For FLASH with data paths,  we construct a SMV -model of a simplified version of the FLASH without data paths, and use NuSmv to enumerate its reachable state set to judge a candidate invariant formula. Here we  emphaszie that the reachable state set of the simplified FLASH  instance  with configuration size NODENUM=3 can be enumerated by the NuSmv in the aforementioned computing server. This oracle is enough for the {\sf invFinder} to find all the invariant formulas on control variables (or without data properties).
+ In order to overrun the obstacle of oracles, {\sf invFinder} provides techniques of simplifying protocols and hybrid oracles. For a complex protocol, a smv-model of a  simplified version of this protocol can be used as an external oracle to verify the guessed candidate formulas. For FLASH with data paths,  we construct a SMV -model of a simplified version of the FLASH without data paths, and use NuSMV to enumerate its reachable state set to judge a candidate invariant formula. Here we  emphaszie that the reachable state set of the simplified FLASH  instance  with configuration size NODENUM=3 can be enumerated by the NuSMV in the aforementioned computing server. This oracle is enough for the {\sf invFinder} to find all the invariant formulas on control variables (or without data properties).
 
  However, if a candidate invariant formula in which data variables occurring, how does {\sf invFinder} deal with it?  For instance, ((Sta.Dir.Dirty = FALSE) \& (!(Sta.MemData = Sta.CurrData))) cann't be judged via the SMV -model of a simplified version of the FLASH without data paths. At this time, a hybrid oracle will be used.  A full protocol instance in Murphi  with configuration size NODENUM=3 ana DATANUM=2, and  Murphi is run to judge the formula containing data variables. Here we adopt an approximation strategy: if Murphi has been run to check the property for a time-out, and no counter-example is found, then the checked formula will be regarded for an invariant.
 
@@ -594,39 +637,6 @@ In order to understand the above proof, we can relate the proof with the three c
 %=========================================
 FLASH has ? rules, each of which can be scheduled and executed if its guard are satifisfied. However, these transactions can be categoried into several groups. In a group, rules are organized by some partial order to implement a READ/WRITE transaction. In a transaction, there should be a commit step,
 
-
-Formally, a transaction flow is a structure, which can be formalized by pair $<R \times N, \rightarrow \cup \Rightarrow>$, where $(r,i) \in R \times N$ is a  node, indicating an client $i$ performs an action of executing a rule $r$. Relations  $\rightarrow$  and $\Rightarrow$ are two   orders over $R \times N$. $(r_1,i_1) \rightarrow (r_2,i_2) \equiv \exists v~e. v:=e \in act(r_1) \land (v=e) \in decompose(guard(r_2))$. A formula $f$ in conjunction form can be composed into a set of sub-formulas $f_i$, denoted as $decompose(f)$, such that each $f_i$ is not of a conjunction form and $f$ is semantically equivalent to $f_1 \land f_2 \land ... \land f_N$. Intuitively $(r_1,i_1) \rightarrow (r_2,i_2)$ means that the triggering of $i_2$ executing $r_2$ needs the completion of $i_1$ executing $r_1$; $(r_1,i_1) \Rightarrow (r_2,i_1)$ means that agent  $i_1$'s action of executing $r_2$ follows the completion of  executing $r_1$. A classical three-hop flow case of a READ-transaction is shown as follows:
-
-
-\begin{figure}[htbp]
-\centering %
-%\vspace{-0.8cm}
-\includegraphics[width=1\textwidth]{flow2.pdf}
-
-\caption{The flow of READ-transaction involving sharing-write back\label{fig:arch}
-}
-\end{figure}
-
-
-This flow is finished by the following steps:
-\begin{enumerate}
-\item An idle remote  client $src$ needs a shared copy of a memory line, and executes   rule PI\_Remote\_Get,  sends the GET request to home.
-
-\item  When the GET request from $src$ arrives at the
-home, the home consults the directory to find that the line is dirty in $dst$,  executes rule NI\_Lcal\_Get\_Get: forwards the GET to $dst$ by telling that $src$ needs the data, and sets Dir.Pending TRUE to make no any other node's request to be processed during the sharing write-back procedure.
-
-\item  When $dst$ receives the forwarded GET, the
-processor $dst$ executes rule NI\_Remote\_Get\_Put, sets its copy to shared state and issues a PUT to $src$ conveying the dirty data,  and  issues a   shwb\_shwb
- (sharing write-back) conveying the dirty data at the same time.
-
-\item   When $home$ receives this SHWB message, it executes the rule NI\_ShWb,
- writes the received
-data back to main memory and puts $src$ on the sharer list.
-
-\item When $dst$ receives this PUT message, it executes the rule NI\_Remote\_Put. If there is not another INV message, then it   uses the received data to update its cache line, and sets its cache to shared state.
-
-
-\end{enumerate}
 
 In order to understand state transitions of this flow after shwb\_shwb is issued, we may observe the invariants containing the condition Sta.ShWbMsg.Cmd = shwb\_shwb.
 
