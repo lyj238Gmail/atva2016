@@ -286,12 +286,12 @@ exclusive and proceeds to write.
 %and the directory properly.
 
 %
-Usually, the above informal paper account of
-\begin{description}
-\item[(1)]  In most previous papers on FLASH, only informal accounts as shown above are discussed. It is still not very clear to most readers, especially to the novel who are not very familiar with FALSH. Its is very desirable for people to have some flow-charts each of  which is a series of rules executed to complete a READ/WRITE transaction. From such a flow, how rules are executed in some special causal order to finish a transaction? How do transactions of different nodes are synchronized with some mechanism to guarantee  the consistency property?
+Usually, only an informal  account of FLASH is provided in most previous work as shown in the above paragraph.   It is still not very clear to most readers, especially to the novel who are not very familiar with FLASH. Its is very desirable for people to have some flow-charts each of  which is a series of rules executed to complete a READ/WRITE transaction. From such a flow, who execute transition rules and exchange messages to implement the designed protocol goals. How rules are executed in some special causal order to finish a transaction? How do transactions of different nodes are synchronized with some mechanism to guarantee  important properties?
 
-\item[(2)] It is preferable to combine steps in a flow with auxiliary inductive invariants. From this we can make it clear that how key state variables in the directory of FLASH guarantee the synchronization between different nodes. Formally, auxiliary inductive invariants will show    the synchronization mechanism in logical formulas.
- \end{description}
+
+
+It is preferable to combine steps in a flow with auxiliary inductive invariants. From this we can make it clear that how key state variables in the directory of FLASH guarantee the synchronization between different nodes. Formally, auxiliary inductive invariants will show    the synchronization mechanism in logical formulas.
+  
 
 
 
