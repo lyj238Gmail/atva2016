@@ -1,0 +1,58 @@
+\begin{thebibliography}{1}
+
+\bibitem{FLASHCache}
+Kuskin, J., Ofelt, D., Heinrich, M., Heinlein, J., Simoni, R., Gharachorloo,
+  K., Chapin, J., Nakahira, D., Baxter, J., Horowitz, M., Gupta, A., Rosenblum,
+  M., Hennessy, J.:
+\newblock The stanford flash multiprocessor.
+\newblock In: Computer Architecture, 1994., Proceedings the 21st Annual
+  International Symposium on. (Apr 1994)  302--313
+
+\bibitem{cade92-pvs}
+Owre, S., Rushby, J.M., , Shankar, N.:
+\newblock {PVS:} {A} prototype verification system.
+\newblock In Kapur, D., ed.: 11th International Conference on Automated
+  Deduction (CADE). Volume 607 of Lecture Notes in Artificial Intelligence.,
+  Saratoga, {NY}, Springer-Verlag (jun 1992)  748--752
+
+\bibitem{Park1996a}
+Park, S., Dill, D.L.:
+\newblock Verification of flash cache coherence protocol by aggregation of
+  distributed transactions.
+\newblock In: Proceedings of the eighth annual ACM symposium on Parallel
+  algorithms and architectures, Padua, Italy, ACM (1996)  288--296
+
+\bibitem{McMillan2001}
+Mcmillan, K.L., Labs, C.B.:
+\newblock Parameterized verification of the flash cache coherence protocol by
+  compositional model checking.
+\newblock In: In CHARME 01: IFIP Working Conference on Correct Hardware Design
+  and Verification Methods, Lecture Notes in Computer Science 2144, Springer
+  (2001)  179--195
+
+\bibitem{cadenceSMV}
+McMillan, K.:
+\newblock The cadence smv model checker \url{http://www.kenmcmil.com/smv.html}.
+
+\bibitem{Chou2004}
+Chou, C.T., Mannava, P., Park, S.:
+\newblock A simple method for parameterized verification of cache coherence
+  protocols.
+\newblock In: Proc.\ 5th International Conference on Formal Methods in
+  Computer-Aided Design. Volume 3312 of LNCS.
+\newblock Springer (2004)  382--398
+
+\bibitem{cubeicBeyond}
+Conchon, S., Goel, A., Krstic, S., Mebsout, A., Zaidi, F.:
+\newblock Invariants for finite instances and beyond.
+\newblock In: Formal Methods in Computer-Aided Design (FMCAD), 2013. (Oct 2013)
+   61--68
+
+\bibitem{Pnueli2001}
+Pnueli, A., Ruah, S., Zuck, L.:
+\newblock Automatic deductive verification with invisible invariants.
+\newblock In: 7th International Conference on Tools and Algorithms for the
+  Construction and Analysis of Systems. Volume 2031 of LNCS.
+\newblock Springer (2001)  82--97
+
+\end{thebibliography}

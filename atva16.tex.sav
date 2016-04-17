@@ -90,7 +90,7 @@
 \begin{abstract}
 %-------------------------------------------------------------------------
 The FALSH protocol is an industrial-scale cache coherence protocol, whose parameterized verification is a notoriously hard challenge to the field of formal methods. In this paper, we show how to verify its important properties by our tool {\sf paraverifier}. Being distinguished from any other approach, our proof product are a formal  proof with a set of inductive invariants. %by induction in Isabelle and a series of message flows which reflect the semantics of the protocol intuitively.
-Among all the work, our work is the most automatical, and the the set of auxiliary invariants is the most complete. Both invariants are searched automatically and the formal proof is generated automatically. Besides, we make efforts to illustrate the semantical intuition behinds these invariants.
+Among all the work, our work is the most automatical. Both invariants are searched automatically and the formal proof is generated automatically. 
 %delay and early versions of FLASH protocol are verified, and the differences between the two versions can be reflected in the auxiliary invariants and flow charts for them found by the tool.
 
 %-------------------------------------------------------------------------
@@ -105,12 +105,12 @@ the area of formal methods, mainly due to the practical importance
 of such systems. Parameterized systems exist in many important
 application areas: cache coherence protocols, security systems, and
 network communication protocols, \emph{etc}. In this work, we will
-focus on a cache coherence protocol -FLASH. The challenge posed by
+focus on cache coherence protocols. The challenge posed by
 parameterized verification is that the desired properties should
 hold in any instance of the parameterized system. %The core of
 %parameterized verification is the construction of a set of auxiliary
 %invariants~\cite{Pnueli2001,Chou2004,Pandav2005,cubicle2011}, which
-%are either used for inductive verification or abstraction model
+a%re either used for inductive verification or abstraction model
 %construction. Therefore, how to find these auxiliary invariants is
 %the central problem in the research field of parameterized
 %verification.
@@ -125,38 +125,39 @@ hold in any instance of the parameterized system. %The core of
 Stanford FLASH cache coherence protocol \cite{FLASHCache} is a publicly-recognized challenging benchmark in the field of formal
  verification. In the pioneering work,
 Park and Dill applied the general purpose theorem prover PVS\cite{cade92-pvs}
-to   verifing the protocol for arbitrary $N$ nodes\cite{Park1996a}. This is a laborious process, since they introduce a simplified  FLASH protocol with the so-called aggregated transactions, which
-is in fact an abstracted version of FLASH, and  need prove
+to the verify  the protocol for arbitrary $N$ nodes\cite{Park1996a}. This is a laborious process, since they introduce the aggregated FLASH protocol, which
+is in fact an abstracted transaction version of FLASH,   need prove
 the correspondence between the abstract and the original FLASH
 protocol, and then prove the correctness of the abstracted protocol, and subsequently derive the correctness of  the
 original protocol by the correspondence. New   auxiliary state variables
-like {\tt fwdSrc} are   introduced  for verification. Deep human insight for FLASH is needed for both the construction of the abstracted protocol  and  introducing new state variables. Inductive invariants must also be
+like {\tt fwdSrc} are   introduced  for verification. Deep human insight for FLASH is needed for both the construction of the aggregated protocol  and  introducing new state variables. Inductive invariants must be
  provided by human, and the theorem prover must be manually guided to perform the induction proof to prove the correspondence between the aggregated protocol  and the original one. %This work is really pioneering because later research on FLASH must also rely on the version of FLASH in \cite{}. Especially, the auxiliary
 %variables proposed  are reserved and needed for verification in later work.
 
-Mcmillan applies methods of compositional model
+Mcmillan consider applies methods of compositional model
 checking \cite{McMillan2001} to the verification of FLASH by using Candence-SMV \cite{cadenceSMV}. %This approach has the advantage that parameterized
 %systems can be proved correct without the need to state inductive invariants explicitly,
-%since invariant information is obtained by model checking abstract systems.
-Safety and liveness of the
-FLASH protocol are both verified. Despite the fact SMV is designed as a model-checker to automatically checking properties, the core techniques for FLASH parameterized verification adopted by Mcmillan is SMV's advanced features for proof such as composition proof and temporal case splitting, and abstraction. Human interaction must be heavily relied on to  guide SMV to work, depending on his deep insight to FLASH. Unlike a general theorem prover like Isabelle, SMV does not have a good logical foundation and mechanism to perform theorem proving. The above proofs are neither rigorous as a theorem prover, nor easily understood to a non-specialist of SMV.  Because these proof techniques is only special for SMV,  they are  difficult to be generalized to other protocols and to be implemented in a general-purpose theorem prover.
+%since invariant information is obtained by model checking abstract systems. McMillan
+use the Candence-SMV  proof assistant [McM99] to verify both safety and liveness of the
+FLASH protocol. Despite the fact SMV is designed as a model-checker to automatically checking properties, the core techniques for FLASH parameterized verification adopted by Mcmillan is SMV's advanced features for proof such as composition proof and temporal case splitting, and abstraction. Human interaction must be heavily relied on to  guide SMV to work, depending on his deep insight to FLASH. Unlike general theorem prover like Isabelle, SMV does not have a good logical foundation to perform theroem proving because its initial design philosphy is based on state enumerating. The above proofs are neither rigorous as a theorem prover, nor easily understood to a non-specialist of SMV.  Because these proof techniques is only special for SMV,  they are  difficult to be generalized to other protocols.
 
 The CMP method, which adopts parameter abstraction and guard strengthening, is proposed
 in~\cite{Chou2004} for verifying a safety property $inv$ of
 a parameterized system.
  An abstract instance of the parameterized protocol,  which consists of m + 1
-nodes $\{P_1, \ldots , P_m, P^*\}$ with $m$ normal nodes plus one
+nodes $\{P_1, \ldots , P_m, P^*\}$ with $m$ normal nodes and one
 abstract node $P^*$, is constructed iteratively. The abstract system is an
 abstraction for any protocol instance whose size is greater than
 $m$. Normally the initial abstract system does not satisfy the
 invariant $inv$. Nevertheless it is still submitted to a model
-checker for verification. When a counterexample is produced, people need to
-carefully analyze it and come up with an auxiliary invariant
-$inv'$, then use it to strengthen the guards of some transition
+checker for verification. When a counterexample is produced, one needs to
+carefully analyze it and comes up with an auxiliary invariant
+$inv'$, then uses it to strengthen the guards of some transition
 rules of the abstract node. The `strengthened' system is then
 subject to model checking again. This process stops until the
 refined abstract system  eventually satisfies the original invariant
-  as well as all the auxiliary invariants supplied by people. However, this method's soundness is only argued in an
+  as well as all the auxiliary invariants supplied by the
+user. However, this method's soundness is only argued in an
 informal way. To the best of our knowledge, no one has
 formally proved its correctness in a theorem prover. This
 situation may be not ideal because its application domain for cache
@@ -168,30 +169,20 @@ In \cite{cubeicBeyond}, an algorithm, called BRAB,    computes over-approximatio
 backward reachable states that are checked to be unreachable in
 a finite instance of the system. These approximations (candidate
 invariants) are then model checked in together with the original
-safety properties. A Finite instance (even small) is regarded as
-an oracle for guiding the choice of candidate
-invariants. Auxiliary invariants are found automatically, but these auxiliary invariants are in concrete form, and are not generalized to the parameterized form. Thus there is no  parameterized proof derived for parameterized verification. Until now, we still can not find a completely formal proof is constructed to verify the full-version of FLAH protocol by adopting the invariants computed by BRAB. %Our work differs from this work in two main points: (1) we  propose three kinds of causal relations and consistency lemmas, which guide the tool to find invariants and construct an inductive proof; (2) we also develop a system approach to generalize the found concrete invariants and causal relations into a symbolic proofs for parameterized verification. For the full version of FLASH protocol with data path, the   invariants computed by BARB are different from ours. Until now, we still can not find a completely formal proof is constructed to verify the full-version of FLAH protocol by adopting the invariants computed by BRAB.
+safety properties. Finite instances (even small) are regarded as
+oracles for guiding the choice of oracle. Our work differs from this work in two main points: (1) we  propose three kinds of causal relations and consistency lemmas, which guide the tool to find invariants and construct an inductive proof; (2) we also develop a system approach to generalize the found concrete invariants and causal relations into a symbolic proofs for parameterized verification. For the full version of FLASH protocol with data path, the   invariants computed by BARB are different from ours. Until now, we still can not find a completely formal proof is constructed to verify the full-version of FLAH protocol by adopting the invariants computed by BRAB.
 
 To sum up,  FLASH is a hard  benchmark with significance for any proposed method for parameterized verification. First it is a cache coherence protocol in real-world, which is  the most important landmark in this field.  As Chou, Mannava, Park pointed out in their FMCAD 2004 paper \cite{Chou2004}, ¡°if the method works on FLASH, then there is a good chance that it will also work on many real-world cache coherence protocols¡±. Second
 FLASH protocol is  sufficiently hard that only two or three methods have  fully verify
-the protocol parametrically. However, human guidance still plays a key role in these successful verification for FLASH. This fact reveals  the weakness of automatical tool in the parameterized verification.  Third, further  efforts are still needed for clear mechanization. As argued in \cite{Chou2004}, ``the first priority is clearly mechanization. Ideally, we want to formalize not only the reasoning
+the protocol parametrically. However, human guidance still plays a key role in these successful verification for FLASH. This fact reveals  the weakness of automatical tool in the parameterized verification. Therefore, our approach has reached the most important landmark in this field. Third, further  effort are needed for clear mechanization. As argued in \cite{Chou2004}, "the first priority is clearly mechanization. Ideally, we want to formalize not only the reasoning
 steps  but also the theory developed in a theorem
-prover, so that we can have a completely formal proof". Therefore it is preferable to  have a completely formal proof for verification of FLASH in a well-known theorem prover. Previous work is too far away from giving a formal proof for FLASH. Even for a moderate case GERMAN protocol, which is much simpler than FLASH, no formal proof is not available yet. Let alone FLASH.
+prover, so that we can have a completely formal proof". It is preferable to  have a completely formal proof for verification of FLASH in a well-known theorem prover. Previous work is too far away from giving a formal proof for FLASH. Even for a moderate case GERMAN protocol, which is much simpler than FLASH, no formal proof is not available yet. Let alone FLASH.
 
 
-The aim of this paper is to apply {\sf paraVerifier} to a  parameterized verification of FLASH protocol in both an automatical and rigorous way. In detail, 
-\begin{itemize}
-\item Interesting auxiliary invariants can be found by {\sf paraVerifier} automatically. Our invariants are visible, which can characterize the semantical features of FLASH, and help people to precisely understand the design of   FLASH.
-
-\item With the help of {\sf paraVerifier}, a formal proof can be constructed automatically as a product of a parameterized verification of FLASH. The formal proof script not  only models the protocol rigorously and specifies its properties without any ambiguity, but also proves them mechanically in the theorem prover. Therefore, it helps us to achieve the highest possible assurance for the correctness of FLASH.
-    
-   
-\end{itemize}
-
-The organization of this work is as follows: Section \ref{sec:Preliminaries} introduces the background of {\sf paraVerifier}; Section  \ref{sec:informalOfFLASH} introduces informally FLASH protocol; Section \ref{sec:formalDescription} introduces our FLASH model in Murphi\cite{Dill1996}; Section \ref{sec:experiments} shows our verification experiments in detail. Especially we introduce some advanced techniques used in our experiments: oracles of simplified version and hybrid oracles, and distributing oracles. Section \ref{sec:relatingWithFlow} tries to explain meanings of inductive invariants with flows.  Section \ref{sec:conclusion} concludes our work.
+The aim of this paper is to apply {\sf paraVerifier} to parameterized verification of FLASH protocol.  The organization of this work is as follows: Section \ref{sec:Preliminaries} introduces the background of {\sf paraVerifier}; Section  \ref{sec:informalOfFLASH} introduces informally FLASH protocol; Section \ref{sec:invFinder} the {\sf invFinder}; Section \ref{sec:generalization} the generalization strategy; Section \ref{sec:prooGen} the {\sf proofGen} and the generated proof. We go through these sections by verifying a small example - mutual exclusion example. Section \ref{sec:experiments} shows the further experiments on real-world protocols. Section \ref{sec:conclusion} concludes our work.
 
 %=========================================
-\section{The Background  of {\sf paraVerifier}\label{sec:Preliminaries}}
+\section{The Background  of {\sf paraVerifier}\label{{sec:Preliminaries}}}
 %=========================================
 {\sf paraVerifier} is devoted to the parameterized verification of a protocol. Usually the tool is used to prove the correctness of the protocol after model checking or testing techniques have been used to verify that typical protocol instances of the protocol  is bug-free. There is still a big gap between the bug-freeness in quite a small number of instances between the correctness in all instances.  Ideally, a proof is preferable to be given to  prove that the correctness holds for any instance. It is a formal proof in a theorem prover that {\sf paraVerifier} generates to verify the protocol. In order to achieve this aim, {\sf paraVerifier} is designed with the following features.
 
@@ -218,7 +209,7 @@ and a proof generator {\tt proofGen}. An overview of our method is  illustrated 
 \paragraph{invFinder}%In order to verify  that an
 %invariant $inv$ holds for any parameterizd instance of a protocol.
 Given a protocol $\mathcal{P}$ and a property $inv$,  written in
-a Murphi  file {\tt prot.m}, is compiled into an internal form {\sf prot.ml}, then fed into the
+a Murphi \cite{} file {\tt prot.m}, is compiled into an internal form {\sf prot.ml}, then fed into the
 \texttt{invFinder}. {\tt invFinder} automatically transform the Murphi file into internal formal model in Ocaml, then tries to find useful auxiliary invariants and causal relations which are capable of proving $inv$. To construct auxiliary invariants and causal relations, we employ heuristics inspired by consistency relation. Also, when several candidate invariants are obtained using the heuristics, we use oracles such as NuSMV and Murphi model checker and an SMT-solver to check each of them under a small reference model of $\mathcal{P}$, and chooses the one that has been verified in the oracles. A table {\tt prot.tbl} is worked out  to store the set of ground invariants and
  causal relations.
 
@@ -229,7 +220,7 @@ a Murphi  file {\tt prot.m}, is compiled into an internal form {\sf prot.ml}, th
 
 
 
-\section{Informal Account of FLASH Protocol\label{sec:informalOfFLASH}}
+\section{Informal Account of FLASH Protocol}
 Here we directly adopt the material in \cite{} to informally introduce FLASH protocol.
 FLASH protocols is a directory-based one which supports a large number of distributed processing nodes. Each cache line-sized block in memory is associated with directory header which keeps information about the line. Each memory address has a home node. Each cache line-sized block in memory is associated
 with a directory header which keeps information about the line. For a memory line, the
@@ -308,7 +299,7 @@ Usually, the above informal paper account of
 
 
 %=========================================
-\section{Formal Description of FLASH in Murphi\label{sec:formalDescription}}
+\section{Formal Description of FLASH in Murphi}
 %=========================================
 Here we adopt a version of FLASH similar to that in \cite{cubeicBeyond}, which is adapted from the version in \cite{Chou2004}. Behaviours of the Home node is not identical to those of the other nodes, while behaviors of
  a non-Home node is identical to that of the other non-Home node. Therefore state variable $a$ on non-Home nodes are stored in array-variables. Some parameterized variable $a[i]$ records some state on $a$ of node $i$. Home is not an explicitly index to reference a node in our model. State of
@@ -415,7 +406,7 @@ invariant "MemDataProp"\\
 The former two properties are the mutual-exclusion properties between  cache state status of two nodes. The last is the  consistency property on data.
 
 %=========================================
-\section{Verifying FLASH by {\sf paraVerifer} \label{sec:experiments}}
+\section{Verifying FLASH by {\sf paraVerifer} \label{sec:verification}}
 For cache coherence protocols like MESI or German protocols with small scales, use of {\sf paraVerifier}  is easy to verify automatically them. A Murphi file is only provided as a formal model, which contain both the protocol and properties under verification. The Murphi model will be automatically transformed into not only an internal model, but also a SMV-smodel. NuSmv will be called to compute the reachable set of the SMV-model. The internal model will be used by the {\sf invFinder} to generate auxiliary invariants. During this generation procedure, a set of candidate invariant formulas are generated in one step, and only one is chosen  if it is an invariant by checking the reachable set of   SMV-model. The oracle of the SMV-model is automatically generated inside the {\sf inVfinder} without human intervention.
 
 However, FLASH with data path is a real world protocol with industry scale. For a FLASH   instance configuration size NODENUM=3 ana DATANUM=2, the protocol is so complex that NuSmv can't compute the reachable state set of the SMV-model which is generated by {\sf invFinder} in a computing server with ?. In fact, this problem of  state explosion is the main obstacle to the applying previous automatical solutions such as \cite{} to the parameterized verification of FLASH. For instance, a reachable state set of a protocol instance of FLASH is need in both the work in \cite{} and that in \cite{}. The former needs the reachable state set to compute the so-called ``invisible inductive invariants" for deductive theorem proving. The latter needs it to strengthen
@@ -437,7 +428,7 @@ memory and time cost
 
 
 %=========================================
-\subsection{Auxiliary Invariants and Causal Relations}\label{sec:causal lines}
+\section{Searching Auxiliary Invariants and causal relations}\label{sec:causal lines}
 %=========================================
 Initially, {\sf paraVerifier} sets the auxilary invariant set to be {\tt \{!(Sta.Proc[1].CacheState = CACHE\_E \& Sta.Proc[2].CacheState = CACHE\_E),
 !(Sta.Proc[1].CacheState = CACHE\_E \& Sta.HomeProc.CacheState = CACHE\_E), !((Sta.Dir.Dirty = FALSE) \& (!(Sta.MemData = Sta.CurrData)))\}}.
@@ -511,7 +502,7 @@ where {\tt n\_NI\_Remote\_PutX[i]} is the rule instance by instantiating {\tt NI
 
 
 %=========================================
-\subsection{ Parameterized Proof Script}
+\section{Generating a Parameterized Proof Script}
 %=========================================
 There are concrete invariants and causal relations, where each  index is a concrete one such as 1 and 2, etc. {\tt proofGen} generalizes these into a N-parameterized form, where each index is symbolic such as $i1$ and $i2$ and $N$ is also symbolic. An Isabelle proof script is automatically generated by {\tt proofGen}, where an N-prameterized instance of FLASH is modelled   and the properties are formally proved. in detail, the proof script is divided into   parts as follows:
 \begin{description}
@@ -590,7 +581,7 @@ qed\\
 \end{specification}\\
 In order to understand the above proof, we can relate the proof with the three causal lines in Sect \ref{sec:causal lines}?.  If we regard the three lines  as a three test points of the causal relation between the parameterized rule {\tt  n\_NI\_Remote\_PutXVsinv1} and invariant {\tt inv1}, the proof is a natural generalization of the three tests. For any actual invariant parameters $i1$ and $i2$, any actual rule parameter $ir$ which satisfy the assumption of the lemma, the causal relation between  must be symmtric to the concrete relations listed in the three lines. Therefore each proof is an abstraction of a kind of concrete causal relations.
 %=========================================
-\section{Illustrating a Typical Flow by With Invariants\label{sec:relatingWithFlow}}
+\section{Illustrating a Typical Flow by With Invariants}
 %=========================================
 FLASH has ? rules, each of which can be scheduled and executed if its guard are satifisfied. However, these transactions can be categoried into several groups. In a group, rules are organized by some partial order to implement a READ/WRITE transaction. In a transaction, there should be a commit step,
 
@@ -657,7 +648,7 @@ inv\_\_146: !((Sta.Dir.HomeHeadPtr = TRUE) \& (Sta.ShWbMsg.Cmd = shwb\_shwb))\\
 inv\_\_13 says that Sta.ShWbMsg.Data must be the same as Sta.CurrData because $dst$ conveys the dirty data when it issues the  shwb\_shwb command in executing rule NI\_Remote\_Get\_Put. At the same time, $dst$ also sets its copy to shared state, thus there is no an exclusive copy. This specified by inv\_\_21 and inv\_\_26. Because   $src$ is a remote node, Sta.ShWbMsg.HomeProc is set FALSE. This is formalized by inv\_\_29. Because  a sharing write-back occurs in a READ-transaction, and others' requests are pended to be processed, there will be no any uni\_putx command  to grant a node's WRITE-request. This formalized by inv\_\_34 and inv\_\_43. Home node itself will not grant its local WRITE-request, thus Sta.HomeUniMsg.Cmd  can't be  uni\_getx. Due to the pending status, thus replacement to the exclusive copy and invalidating operation to shared nodes can't occur, thus Sta.WbMsg.Cmd can't be wb\_wb, Sta.NakcMsg.Cmd can't be nakc\_nakc, and Sta.Dir.InvSet tag to any node can't be TRUE. These are formalized by inv\_\_56, inv\_\_76, and inv\_\_102.  A sharing write-back occurs when Home node find that there is a remote and dirty copy, therefore Sta.Dir.Dirty must be TRUE and Sta.Dir.Local must be FALSE. This is formalized by inv\_\_42 and inv\_\_49. A dirty copy also means that no any other node shares this data, thus Sta.Dir.ShrSet of any node is set FALSE. This is formalized by inv\_\_75.  At the same time, Sta.Dir.HeadVld has been set TRUE and Sta.Dir.HomeHeadPtr has been set to $dst$. This formalized by inv\_\_135 and inv\_\_146 respectively. At the same time,
 
 
-\section{Conclusion\label{sec:conclusion}}
+\section{Conclusion}
 %=========================================
 Our case studies on cache coherence protocols are typical examples
 to illustrate the guiding principle of {\sf paraVerifier}. The
