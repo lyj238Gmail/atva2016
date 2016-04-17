@@ -1,10 +1,14 @@
+<<<<<<< HEAD
 This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2016.2.4)  16 APR 2016 22:51
+=======
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2013.12.9)  17 APR 2016 10:54
+>>>>>>> origin/master
 entering extended mode
 **atva16.tex
-(C:\Users\lenovo\Documents\GitHub\atva2016\atva16.tex
+(C:\Users\lyj\Documents\git\atva2016\atva16.tex
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for loaded.
-(C:\Users\lenovo\Documents\GitHub\atva2016\llncs.cls
+(C:\Users\lyj\Documents\git\atva2016\llncs.cls
 Document Class: llncs 2010/07/12 v2.17 
  LaTeX document class for Lecture Notes in Computer Science
 (C:\CTEX\MiKTeX\tex\latex\base\article.cls
@@ -277,7 +281,7 @@ File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
 Package color Info: Driver file: pdftex.def on input line 130.
 )
-(C:\Users\lenovo\Documents\GitHub\atva2016\isabelle.sty
+(C:\Users\lyj\Documents\git\atva2016\isabelle.sty
 \isa@parindent=\dimen137
 \isa@parskip=\dimen138
 
@@ -289,7 +293,7 @@ Including comment 'isadelimproof' Including comment 'isatagproof'
 Including comment 'isadelimML' Including comment 'isatagML'
 Including comment 'isadelimvisible' Including comment 'isatagvisible'
 Excluding comment 'isadeliminvisible' Excluding comment 'isataginvisible')
-(C:\Users\lenovo\Documents\GitHub\atva2016\isabellesym.sty)
+(C:\Users\lyj\Documents\git\atva2016\isabellesym.sty)
 (C:\CTEX\MiKTeX\tex\latex\tools\theorem.sty
 Package: theorem 1995/11/23 v2.2c Theorem extension package (FMi)
 \theorem@style=\toks24
@@ -467,7 +471,11 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip73
 )
+<<<<<<< HEAD
 (C:\Users\lenovo\Documents\GitHub\atva2016\atva16.aux
+=======
+(C:\Users\lyj\Documents\git\atva2016\atva16.aux
+>>>>>>> origin/master
 
 LaTeX Warning: Label `fig:arch' multiply defined.
 
@@ -514,8 +522,13 @@ LaTeX Info: Redefining \ref on input line 79.
 LaTeX Info: Redefining \pageref on input line 79.
 LaTeX Info: Redefining \nameref on input line 79.
 
+<<<<<<< HEAD
 (C:\Users\lenovo\Documents\GitHub\atva2016\atva16.out)
 (C:\Users\lenovo\Documents\GitHub\atva2016\atva16.out)
+=======
+(C:\Users\lyj\Documents\git\atva2016\atva16.out)
+(C:\Users\lyj\Documents\git\atva2016\atva16.out)
+>>>>>>> origin/master
 \@outlinefile=\write4
 LaTeX Font Info:    Try loading font information for U+msa on input line 88.
 
@@ -542,6 +555,7 @@ Missing character: There is no ° in font cmr10!
 Missing character: There is no ¡ in font cmr10!
 Missing character: There is no ± in font cmr10!
 
+<<<<<<< HEAD
 Underfull \vbox (badness 5105) has occurred while \output is active []
 
  [2]
@@ -768,3 +782,21 @@ PDF statistics:
  46 named destinations out of 1000 (max. 500000)
  19 words of extra memory for PDF output out of 10000 (max. 10000000)
 
+=======
+LaTeX Warning: Citation `Chou2004' on page 3 undefined on input line 175.
+
+
+LaTeX Warning: Reference `sec:Preliminaries' on page 3 undefined on input line 
+180.
+
+
+LaTeX Warning: Reference `sec:informalOfFLASH' on page 3 undefined on input lin
+e 180.
+
+
+LaTeX Warning: Reference `sec:invFinder' on page 3 undefined on input line 180.
+
+
+
+LaTeX Warning: Reference `sec:generalization' on p
+>>>>>>> origin/master
