@@ -230,7 +230,7 @@ a Murphi  file {\tt prot.m}, is compiled into an internal form {\sf prot.ml}, th
 
 
 \section{Informal Account of FLASH Protocol\label{sec:informalOfFLASH}}
-\subsection{A textual description} 
+\subsection{A textual description}
 Firstly we give a classical textual description, which is directly cited from the material in \cite{Park2000} to informally introduce FLASH protocol.
 FLASH protocols is a directory-based one which supports a large number of distributed processing nodes. Each cache line-sized block in memory is associated with directory header which keeps information about the line. Each memory address has a home node. Each cache line-sized block in memory is associated
 with a directory header which keeps information about the line. For a memory line, the
@@ -329,7 +329,7 @@ processor $dst$ executes rule \\
 NI\_Remote\_Get\_Put, sets its copy to shared state and issues a PUT to $src$ conveying the dirty data,  and  issues a   shwb\_shwb
  (sharing write-back) conveying the dirty data at the same time.
 
-\item   When $home$ receives this SHWB message, it executes the rule NI\_ShWb, and 
+\item   When $home$ receives this SHWB message, it executes the rule NI\_ShWb, and
  writes the received
 data back to main memory and puts $src$ on the sharer list.
 
@@ -355,7 +355,7 @@ Compared with a textual description, a flow description has the advantage that (
 %=========================================
 A formal protocol model includes a set of parameterized transition rules and properties.  Here we adopt a version of FLASH similar to that in \cite{cubeicBeyond}, which is different from the version in \cite{Chou2004}. The difference between them lies in the modelling of behaviors of a Home node. Behaviours of the Home node is not identical to those of the other nodes, while behaviors of
  a non-Home node is identical to that of the other non-Home node. In the model of work in \cite{Chou2004}, state variables of the Home node and non-Home nodes are both array-variables. This modelling has a shortage of destroying the symmetry between indices which represents identifiers for agents.
-  
+
 In our modelling, the symmetry between indices should be preserved and will be used in {\sf paraVerifier}. Namely  A  state variable $a$ on non-Home nodes are stored in array-variables. Some parameterized variable $a[i]$ records some state on $a$ of node $i$. Home is not an explicitly index to reference a node in our model. State of
  the Home node on $a$ is recorded as global  (or non-parameterized variable) $Homea$. %Index variable $v$ to represent some index of a node is only for non-Home nodes. We explicitly introduce an extra variable $Homev$ to identify the case when the node index should be $Home$.
  Being consistent with the above philosphy, our FLASH in Murphi is changed accordingly. For instance, we compare the original version in \cite{Chou2004}, which is shown in (a), with our version, which is shown in (b):
@@ -472,9 +472,48 @@ However, FLASH with data path is a real world protocol with industry scale. For 
 
  The approximation may introduce a false invariant, which leads to a doubt of the soundness of our method.  Intuitively, a  false invariant holds at any   state which either occurs in the reachable state set of the smv-model or in a state traversed by Murphi. But it may not hold at a state of a protocol instance which is not in the aforementioned reachable state sets. Here we emphasize that the ultimate correctness is guaranteed by the theorem proving process of the generated proof script in Isabelle. If such a false invariant is generalized and occurs in the parameterized invariant set, the generated proof script can't be passed in Isabelle.
 
-The verification command,
+Running experiments on verifying FLASH protocol by {\sf paraVerifier} under Linux system, some simple steps are needed. Firstly, convert Murphi model of FLASH to its corresponding internel model by compiler {\sf murphi2ocaml} supposing that the compiler was put in path {\sf\$\{moc\}}.
 
-memory and time cost
+\begin{specification}
+  \$ python \$\{moc\}/gen.py -m flash.m > flash.ml
+\end{specification}
+
+Secondly, build the specific verifier for FLASH with OCaml and run the generated executalbe supposing that address of the NuSMV oracle was {\sf vserv} and address of the Murphi oracle was {\sf mserv}. Afterwards, a directory named {\sf n\_flash} where proof scripts were put will be generated.
+
+\begin{specification}
+  corebuild flash.byte -pkg re2 -I src\\
+  ./flash.byte -vh vserv -mh mserv
+\end{specification}
+
+Finally, run the proof scripts in Isabelle.
+
+\begin{specification}
+  cd n\_flash\\
+  ./run.sh
+\end{specification}
+
+We run {\sf paraVerifier} on a client with 4 Intel Xeon processors, 8 GB memory and 64 bit Linux 3.15.10. The NuSMV oracle and Murphi oracle were set on a server with 32 Inter Xeon processors, 370 GB memory and 64 bit Linux 2.6.32. Result of our experiments is as Table \ref{tab:flashRes}.
+
+\begin{table}[!htbp]
+  \centering
+  \footnotesize
+  \begin{tabular}{|c|c|}
+    \hline
+    \#rules & 62\\
+    \hline
+    \#invariants & 162\\
+    \hline
+    Time of {\sf paraVerifier} (minutes) & 9.82\\
+    \hline
+    Memory of {\sf paraVerifier} (MB) & 178\\
+    \hline
+    Time of proof (hours) & 10.76\\
+    \hline
+  \end{tabular}
+  \caption{Verification Result on FLASH}
+  \label{tab:flashRes}
+\end{table}
+
 
 
 
