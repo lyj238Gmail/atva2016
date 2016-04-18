@@ -18,6 +18,7 @@
 \usepackage{algorithmic}
 \usepackage[linesnumbered,ruled,vlined]{algorithm2e}
 \usepackage{multicol}
+\usepackage{enumitem}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %For Isabelle code
 \newlength{\fminilength}
@@ -80,9 +81,16 @@
 
 \title{  An Automatical Parameterized Verification of  FLASH Cache Coherence Protocols by Paraverifier}
 \titlerunning{paraVerifier: An Invariant Finder}
-\author{~}
-\authorrunning{~}
-\institute{~}
+\author{Yongjian Li \inst{1} \and
+        Kaiqiang Duan \inst{1} \and 
+        Shaowei Cai \inst{1} \and
+        Yi Lv \inst{1} }
+\authorrunning{Li et al.}
+\institute{
+State Key Laboratory of Computer Science,
+%Institute of Software,
+Chinese Academy of Sciences 
+}
 
 \maketitle
 
@@ -438,9 +446,7 @@ endrule; endruleset;\\
 
 
 
-  In our version, we add a field $HomeProc$. If $HomeProc$ is true, then this is according to the case $Proc=Home$ in the original version, else     the case where $Proc$ is a non-Home node. $HomeHeadPtr$ is added similiarly in our model.  $HomeShrSet$  and     $HomeInvSet$ are added in our model to model $ShrSet[Home]$ and $InvSet[Home]$ to be true in the original version. We use the assignment $Sta.UniMsg[src].HomeProc := true$ to implicitly model the fact that $Sta.UniMsg[src].Proc$ is the $Home$ node.
-
-There are three properties under verification.
+  In our version, we add a field $HomeProc$. If $HomeProc$ is true, then this is according to the case $Proc=Home$ in the original version, else     the case where $Proc$ is a non-Home one. $HomeHeadPtr$ is added similarly in our model.  $HomeShrSet$  and     $HomeInvSet$ are added in order to model $ShrSet[Home]$ and $InvSet[Home]$ to be true in the original version. We use the assignment $Sta.UniMsg[src].HomeProc := true$ to  model   that $Sta.UniMsg[src].Proc$ is the $Home$ node. There are three properties under verification.
 
 \begin{specification}\\
 invariant "CacheStateProp"\\
@@ -497,6 +503,8 @@ We run {\sf paraVerifier} on a client with 4 Intel Xeon processors, 8 GB memory 
 \begin{table}[!htbp]
   \centering
   \footnotesize
+   \caption{Verification Result on FLASH}
+  \label{tab:flashRes}
   \begin{tabular}{|c|c|}
     \hline
     \#rules & 62\\
@@ -510,8 +518,7 @@ We run {\sf paraVerifier} on a client with 4 Intel Xeon processors, 8 GB memory 
     Time of proof (hours) & 10.76\\
     \hline
   \end{tabular}
-  \caption{Verification Result on FLASH}
-  \label{tab:flashRes}
+ 
 \end{table}
 
 
@@ -523,13 +530,13 @@ We run {\sf paraVerifier} on a client with 4 Intel Xeon processors, 8 GB memory 
 %=========================================
 \subsection{Auxiliary Invariants and Causal Relations}\label{sec:causal lines}
 %=========================================
-Initially, {\sf paraVerifier} sets the auxilary invariant set to be {\tt \{!(Sta.Proc[1].CacheState = CACHE\_E \& Sta.Proc[2].CacheState = CACHE\_E),
-!(Sta.Proc[1].CacheState = CACHE\_E \& Sta.HomeProc.CacheState = CACHE\_E), !((Sta.Dir.Dirty = FALSE) \& (!(Sta.MemData = Sta.CurrData)))\}}.
+%Initially, {\sf paraVerifier} sets the auxilary invariant set to be {\tt \{!(Sta.Proc[1].CacheState = CACHE\_E \& Sta.Proc[2].CacheState = CACHE\_E),
+%!(Sta.Proc[1].CacheState = CACHE\_E \& Sta.HomeProc.CacheState = CACHE\_E), !((Sta.Dir.Dirty = FALSE) \& (!(Sta.MemData = Sta.CurrData)))\}}.
 
-We also need tell  the tool two protocol instances. One is with size 2 but without data paths (i.e., the variables such as Sta.MemData and Sta.CurrData can be omitted), and the second is with size 2 but with data paths.
-The reachable state set of the former can be enumerated by SMV, but that of the latter cann't be. {\sf paraVerifier} need the two instances to verify a candidate formula which is guessed by heuristics. If all the variables occurring in the candidate formula is  in the former instance, then {\sf paraVerifier} will query the   reachable state set to verify the formula; otherwise {\sf paraVerifier} will call MURPHI to verify the formula. In the second kind of checking, a time limit will beset, if MURPHI can check the falsity of the formula within the limit, then the candidate will be dropped; otherwise the candidate will be put it into the auxiliary invariant set.
+%We also need tell  the tool two protocol instances. One is with size 2 but without data paths (i.e., the variables such as Sta.MemData and Sta.CurrData can be omitted), and the second is with size 2 but with data paths.
+%The reachable state set of the former can be enumerated by SMV, but that of the latter cann't be. {\sf paraVerifier} need the two instances to verify a candidate formula which is guessed by heuristics. If all the variables occurring in the candidate formula is  in the former instance, then {\sf paraVerifier} will query the   reachable state set to verify the formula; otherwise {\sf paraVerifier} will call MURPHI to verify the formula. In the second kind of checking, a time limit will beset, if MURPHI can check the falsity of the formula within the limit, then the candidate will be dropped; otherwise the candidate will be put it into the auxiliary invariant set.
 
-After searching, the set of auxiliary invariants contains 162 formulas. This is  fully AUTOMATICAL work done by {\sf paraVerifier}.  Here we select and analyze all the invariants on Sta.Dir.Pending, which help us to understand the function of the control variable.
+The set of auxiliary invariants, which is found by {\sf paraVerifier}, contains 162 formulas. This work is  fully AUTOMATICAL  done by {\sf paraVerifier}.  Here we select and analyze all the invariants on Sta.Dir.Pending, which help us to understand the function of the control variable.
 
 \begin{specification}\\
 inv\_\_44!((Sta.HomeUniMsg.Cmd = uni\_get) \& (Sta.Dir.Pending = FALSE))\\
@@ -597,8 +604,12 @@ where {\tt n\_NI\_Remote\_PutX[i]} is the rule instance by instantiating {\tt NI
 %=========================================
 \subsection{ Parameterized Proof Script}
 %=========================================
-There are concrete invariants and causal relations, where each  index is a concrete one such as 1 and 2, etc. {\tt proofGen} generalizes these into a N-parameterized form, where each index is symbolic such as $i1$ and $i2$ and $N$ is also symbolic. An Isabelle proof script is automatically generated by {\tt proofGen}, where an N-prameterized instance of FLASH is modelled   and the properties are formally proved. in detail, the proof script is divided into   parts as follows:
-\begin{description}
+
+There are concrete invariants and causal relations, where each  index is a concrete one such as 1 and 2, etc. {\tt proofGen} generalizes these into a N-parameterized form, where each index is symbolic such as $i1$ and $i2$ and $N$ is also symbolic. An Isabelle proof script is automatically generated by {\tt proofGen}, where an N-prameterized instance of FLASH is modelled   and the properties are formally proved. The Hierachy of the lemmas is illustrated as Fig. \ref{fig:lemmaHierachy}. $A \rightarrow B$ means that the proof of lemma $A$ needs applying lemma $B$.
+
+
+In detail, the proof script is divided into   parts as follows:
+\begin{enumerate}[noitemsep,nolistsep]
 \item[1] Definitions of formally parameterized invariant formulas, which are generalized from concrete invariants. There are 161 such invariants. An actual N-parameterized invariant can be obtained by instantiating a formal invariant formula with symbolic indexes. All   actual invariant formulas in the N-parameterized are defined by a set invariants N;
 
 \item[2] Definitions of formally parameterized rules,  which can be directly transformed from the  Murphi rules of FLASH. There are ? rules.  Actual parameterized rules can be defined similarly. All actual invariant formulas in the N-parameterized are defined by a set rules N;
@@ -618,23 +629,32 @@ There are concrete invariants and causal relations, where each  index is a concr
 \item[8] A lemma {\tt on\_inits} proves that for all invariants they hold at the initial state of the protocol.
 
 \item[9] Main theorem  proving that any invariant formula  hods at any reachable state of the  N-parameterized FLASH protocol instance.
-\end{description}
+\end{enumerate}
 
-The Hierachy of the lemmas is illustrated as Fig. \ref{}. $A \rightarrow B$ means that the proof of lemma $A$ needs applying lemma $B$.
+
+
+
+\begin{figure}[htbp]
+\centering %
+%\vspace{-0.8cm}
+\includegraphics[width=0.8\textwidth]{thy.pdf}
+
+\caption{The Hierachy of the lemmas\label{fig:lemmaHierachy}
+}
+\end{figure}
 
 
 \begin{specification}\\
 definition inv1::"nat $\Rightarrow$ nat $\Rightarrow$ formula" where [simp]:\\
-"inv1 \pInv0 \pInv1 $\equiv$\\
-(neg (andForm (eqn (IVar (Field (Para (Field (Ident ''Sta'') ''Proc'') \pInv1) ''CacheState''))\\
- (Const CACHE\_E)) (eqn (IVar (Field (Para (Field (Ident ''Sta'') ''Proc'') \pInv0) ''CacheState'')) (Const CACHE\_E))))"\\
+"inv1 \pInv0 \pInv1 $\equiv$
+(neg (andForm (eqn (IVar (Field (Para (Field (Ident ''Sta'') ''Proc'') \pInv1)\\ ''CacheState''))\\
+ (Const CACHE\_E)) (eqn (IVar (Field (Para (Field (Ident ''Sta'') ''Proc'') \pInv0)\\ ''CacheState'')) (Const CACHE\_E))))"\\
 definition invariants::"nat $\Rightarrow$ formula set" where [simp]:\\
-"invariants N $\equiv$ \{f.\\
+"invariants N $\equiv$ \{f. 
 ($\exists$ pInv0 pInv1. pInv0$\le$N$\wedge$pInv1$\le$N$\wedge$pInv0~=pInv1$\wedge$f=inv1  pInv0 pInv1) $\vee$\\
-($\exists$ pInv0. pInv0 $\le$N$\wedge$f=inv2  pInv0) $\vee$\\
+($\exists$ pInv0. pInv0 $\le$N$\wedge$f=inv2  pInv0) $\vee$ 
 (f=inv3  ) $\vee$ ......\\
-($\exists$ pInv0. pInv0$\le$N$\wedge$f=inv162  pInv0)\\
-\}"\\
+($\exists$ pInv0. pInv0$\le$N$\wedge$f=inv162  pInv0) \}"\\
 \end{specification}\\
 \begin{specification}\\
 lemma n\_NI\_Remote\_PutXVsinv1:\\
