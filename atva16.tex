@@ -106,7 +106,7 @@ Among all the work, our work is the most automatical, and the the set of auxilia
 %-------------------------------------------------------------------------
 
 %=========================================
-\section{Introduction}
+\section{Introduction}\label{sec:introduction}
 %=========================================
 Verification of parameterized concurrent systems is interesting in
 the area of formal methods, mainly due to the practical importance
@@ -730,21 +730,14 @@ inv\_\_13 says that Sta.ShWbMsg.Data must be the same as Sta.CurrData because $d
 
 \section{Conclusion and Future Work\label{sec:conclusion}}
 %=========================================
-Our case study on FLASH is a  typically successful application of {\sf paraVerifier} which combines   
-model checking and theorem proving. The
+Our case study on FLASH is a  typically successful application of {\sf paraVerifier} which combines model checking and theorem proving. The
 consistency lemma based on the induction approach, is the
 core of our work, which gives the heuristics to guide the tool
- to search invariants. By model checking candidate invariants in , by generalizing , we theorem proving
- 
- 
- In this sense, we realize the 
- 
- Compared with previous work, the invariants we construct is the most abundant. From this aspect, our understanding is . In fact , we can axioma semantics of . Intuitively we We have control variables and .It is also interesting to relate our approach to previous work?
- 
- Instead of ``invisible invariants" in previous work
- (see e.g,~\cite{Pnueli2001}, our invariants are visible,
- which can be further refined to precisely
- analyze the correctness of the protocol both in theoretical and practical aspects.
+ to construct candidate invariants. By using NuSMV or Murphi to model check  candidate invariants, true invariants are  chosen.  By generalizing the invariants into a parameterized form, {\sf paraVerifier} generates automatically a proof script to  theorem prove the protocol. Again, the consistency lemma is used as a main theorem to prove all the invariants. Searching invariants and proof generation are both automatical. The ultimate correctness is gurantteed by a mechanical proof in a theorem prover. Therefore , we realize the two goals set up in Section \ref{sec:introduction}: verifying FLASH in both an automatical and rigorous way.
+
+ Compared with previous work, the invariants   is the most abundant in our work. As we have discussed in \ref{sec:experiments} and \ref{sec:relatingWithFlow}, these invariants have shed light on the semantics of FLASH. Both functions of control variables and synchronization of executing rules of different  READ-WRITE transactions. In this sense,  our understanding  is the most profound by using {\sf paraVerifier} to verify it. In fact, these invariants can be regarded as axiom semantics of FLASH. Intuitively we We have control variables and .It is also interesting to relate our approach to previous work?
+
+ In the future, we want to extend our work in the following two directions: (1) We want to automate the CMP-method in \cite{Chou2004} by adopting our invariants. We believe that our invariant should be enough to strenthen   guards of the rules of the abstract node; (2) We want to relate the predicate-abstraction with our work. By assigning proper predicates, we can construct the abstract version of the protocol, which can be regarded as a specification of the protocol. The original FLASH is regarded as the implementation of the specification. Our invariants should be very useful in proving the refinement between the implementation and specification.
 
 \bibliographystyle{splncsnat}
 \bibliography{gste,cache,refer}
