@@ -1,8 +1,72 @@
-This is BibTeX, Version 0.99dThe top-level auxiliary file: atva16.aux
+This is BibTeX, Version 0.99d (TeX Live 2015)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: atva16.aux
 The style file: splncsnat.bst
 Database file #1: gste.bib
 Database file #2: cache.bib
 Database file #3: refer.bib
-Warning--I didn't find a database entry for "Dill1996"
-Warning--I didn't find a database entry for "Park2000"
-(There were 2 warnings)
+Database file #4: lvyi.bib
+Repeated entry---line 338 of file lvyi.bib
+ : @incollection{Arons2001
+ :                        ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1484 of file lvyi.bib
+ : @inproceedings{Chou2004
+ :                        ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 4416 of file lvyi.bib
+ : @inproceedings{Lv2007
+ :                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 4593 of file lvyi.bib
+ : @inproceedings{McMillan2001
+ :                            ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 5239 of file lvyi.bib
+ : @inproceedings{Park1996a
+ :                         ,
+I'm skipping whatever remains of this entry
+Warning--empty booktitle in Park2000
+Warning--can't use both volume and number fields in Park2000
+You've used 12 entries,
+            2087 wiz_defined-function locations,
+            595 strings with 6756 characters,
+and the built_in function-call counts, 4954 in all, are:
+= -- 508
+> -- 189
+< -- 17
++ -- 66
+- -- 54
+* -- 348
+:= -- 641
+add.period$ -- 28
+call.type$ -- 12
+change.case$ -- 12
+chr.to.int$ -- 0
+cite$ -- 14
+duplicate$ -- 253
+empty$ -- 474
+format.name$ -- 54
+if$ -- 1242
+int.to.chr$ -- 0
+int.to.str$ -- 12
+missing$ -- 11
+newline$ -- 65
+num.names$ -- 18
+pop$ -- 62
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 187
+stack$ -- 0
+substring$ -- 324
+swap$ -- 136
+text.length$ -- 17
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 2
+while$ -- 43
+width$ -- 14
+write$ -- 150
+(There were 5 error messages)

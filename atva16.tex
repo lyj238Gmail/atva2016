@@ -97,8 +97,8 @@ Chinese Academy of Sciences
 %-------------------------------------------------------------------------
 \begin{abstract}
 %-------------------------------------------------------------------------
-The FALSH protocol is an industrial-scale cache coherence protocol, whose parameterized verification is a notoriously hard challenge to the field of formal methods. In this paper, we show how to verify its important properties by our tool {\sf paraverifier}. Being distinguished from any other approach, our proof product are a formal  proof with a set of inductive invariants. %by induction in Isabelle and a series of message flows which reflect the semantics of the protocol intuitively.
-Among all the work, our work is the most automatical, and the the set of auxiliary invariants is the most complete. Both invariants are searched automatically and the formal proof is generated automatically. Besides, we make efforts to illustrate the semantical intuition behinds these invariants.
+The FLASH protocol is an industrial-scale cache coherence protocol, whose parameterized verification is a notoriously hard challenge to the field of formal methods. In this paper, we show how to verify its important properties by our tool {\sf paraverifier}. Being distinguished from any other approach, our proof product is a formal  proof with a set of inductive invariants. %by induction in Isabelle and a series of message flows which reflect the semantics of the protocol intuitively.
+Among all the work, our work is the most automatical, and the  set of auxiliary invariants is the most complete. Both invariants are searched automatically and the formal proof is generated automatically. Besides, we make efforts to illustrate the semantical intuition behinds these invariants.
 %delay and early versions of FLASH protocol are verified, and the differences between the two versions can be reflected in the auxiliary invariants and flow charts for them found by the tool.
 
 %-------------------------------------------------------------------------
@@ -133,21 +133,21 @@ hold in any instance of the parameterized system. %The core of
 Stanford FLASH cache coherence protocol \cite{FLASHCache} is a publicly-recognized challenging benchmark in the field of formal
  verification. In the pioneering work,
 Park and Dill applied the general purpose theorem prover PVS\cite{cade92-pvs}
-to   verifing the protocol for arbitrary $N$ nodes\cite{Park1996a}. This is a laborious process, since they introduce a simplified  FLASH protocol with the so-called aggregated transactions, which
-is in fact an abstracted version of FLASH, and  need prove
+to   verify the protocol for arbitrary $N$ nodes\cite{Park1996a}. This is a laborious process, since they introduce a simplified  FLASH protocol with the so-called aggregated transactions, which
+is, in fact,  an abstracted version of FLASH, and  need to prove
 the correspondence between the abstract and the original FLASH
 protocol, and then prove the correctness of the abstracted protocol, and subsequently derive the correctness of  the
 original protocol by the correspondence. New   auxiliary state variables
 like {\tt fwdSrc} are   introduced  for verification. Deep human insight for FLASH is needed for both the construction of the abstracted protocol  and  introducing new state variables. Inductive invariants must also be
- provided by human, and the theorem prover must be manually guided to perform the induction proof to prove the correspondence between the aggregated protocol  and the original one. %This work is really pioneering because later research on FLASH must also rely on the version of FLASH in \cite{}. Especially, the auxiliary
+ provided by a human, and the theorem prover must be manually guided to perform the induction proof to prove the correspondence between the aggregated protocol  and the original one. %This work is really pioneering because later research on FLASH must also rely on the version of FLASH in \cite{}. Especially, the auxiliary
 %variables proposed  are reserved and needed for verification in later work.
 
 Mcmillan applies methods of compositional model
-checking \cite{McMillan2001} to the verification of FLASH by using Candence-SMV \cite{cadenceSMV}. %This approach has the advantage that parameterized
+checking \cite{McMillan2001} to the verification of FLASH by using Cadence-SMV \cite{cadenceSMV}. %This approach has the advantage that parameterized
 %systems can be proved correct without the need to state inductive invariants explicitly,
 %since invariant information is obtained by model checking abstract systems.
 Safety and liveness of the
-FLASH protocol are both verified. Despite the fact SMV is designed as a model-checker to automatically checking properties, the core techniques for FLASH parameterized verification adopted by Mcmillan is SMV's advanced features for proof such as composition proof and temporal case splitting, and abstraction. Human interaction must be heavily relied on to  guide SMV to work, depending on his deep insight to FLASH. Unlike a general theorem prover like Isabelle, SMV does not have a good logical foundation and mechanism to perform theorem proving. The above proofs are neither rigorous as a theorem prover, nor easily understood to a non-specialist of SMV.  Because these proof techniques is only special for SMV,  they are  difficult to be generalized to other protocols and to be implemented in a general-purpose theorem prover.
+FLASH protocol are both verified. Despite the fact that SMV is designed as a model-checker to automatically checking properties, the core techniques for FLASH parameterized verification adopted by Mcmillan is SMV's advanced features for proof such as composition proof and temporal case splitting, and abstraction. Human interaction must be heavily relied on to  guide SMV to work, depending on his deep insight to FLASH. Unlike a general theorem prover like Isabelle, SMV does not have a good logical foundation and mechanism to perform theorem proving. The above proofs are neither rigorous as a theorem prover, nor easily understood to a non-specialist of SMV.  Because these proof techniques are  only special for SMV,  they are  difficult to be generalized to other protocols and to be implemented in a general-purpose theorem prover.
 
 The CMP method, which adopts parameter abstraction and guard strengthening, is proposed
 in~\cite{Chou2004} for verifying a safety property $inv$ of
@@ -157,7 +157,7 @@ nodes $\{P_1, \ldots , P_m, P^*\}$ with $m$ normal nodes plus one
 abstract node $P^*$, is constructed iteratively. The abstract system is an
 abstraction for any protocol instance whose size is greater than
 $m$. Normally the initial abstract system does not satisfy the
-invariant $inv$. Nevertheless it is still submitted to a model
+invariant $inv$. Nevertheless, it is still submitted to a model
 checker for verification. When a counterexample is produced, people need to
 carefully analyze it and come up with an auxiliary invariant
 $inv'$, then use it to strengthen the guards of some transition
@@ -170,7 +170,7 @@ formally proved its correctness in a theorem prover. This
 situation may be not ideal because its application domain for cache
 coherence protocols  which demands the highest assurance for
 correctness. Besides, the analysis of counter-example and generation of new auxiliary invariants usually
- depend on human's deep insightful understanding of the protocol. It is too laborious for people to do these analysis and some effective automatic  tool is needed to help people.
+ depend on human's deep insightful understanding of the protocol. It is too laborious for people to do this analysis and some effective automatic  tool is needed to help people.
 
 In \cite{cubeicBeyond}, an algorithm, called BRAB,    computes over-approximations of
 backward reachable states that are checked to be unreachable in
@@ -178,16 +178,16 @@ a finite instance of the system. These approximations (candidate
 invariants) are then model checked in together with the original
 safety properties. A Finite instance (even small) is regarded as
 an oracle for guiding the choice of candidate
-invariants. Auxiliary invariants are found automatically, but these auxiliary invariants are in concrete form, and are not generalized to the parameterized form. Thus there is no  parameterized proof derived for parameterized verification. Until now, we still can not find a completely formal proof is constructed to verify the full-version of FLAH protocol by adopting the invariants computed by BRAB. %Our work differs from this work in two main points: (1) we  propose three kinds of causal relations and consistency lemmas, which guide the tool to find invariants and construct an inductive proof; (2) we also develop a system approach to generalize the found concrete invariants and causal relations into a symbolic proofs for parameterized verification. For the full version of FLASH protocol with data path, the   invariants computed by BARB are different from ours. Until now, we still can not find a completely formal proof is constructed to verify the full-version of FLAH protocol by adopting the invariants computed by BRAB.
+invariants. Auxiliary invariants are found automatically, but these auxiliary invariants are in concrete form and are not generalized to the parameterized form. Thus, there is no  parameterized proof derived for parameterized verification. Until now, we still can not find a completely formal proof is constructed to verify the full-version of FLAH protocol by adopting the invariants computed by BRAB. %Our work differs from this work in two main points: (1) we  propose three kinds of causal relations and consistency lemmas, which guide the tool to find invariants and construct an inductive proof; (2) we also develop a system approach to generalize the found concrete invariants and causal relations into a symbolic proofs for parameterized verification. For the full version of FLASH protocol with data path, the   invariants computed by BARB are different from ours. Until now, we still can not find a completely formal proof is constructed to verify the full-version of FLAH protocol by adopting the invariants computed by BRAB.
 
-To sum up,  FLASH is a hard  benchmark with significance for any proposed method for parameterized verification. First it is a cache coherence protocol in real-world, which is  the most important landmark in this field.  As Chou, Mannava, Park pointed out in their FMCAD 2004 paper \cite{Chou2004}, ¡°if the method works on FLASH, then there is a good chance that it will also work on many real-world cache coherence protocols¡±. Second
-FLASH protocol is  sufficiently hard that only two or three methods have  fully verify
-the protocol parametrically. However, human guidance still plays a key role in these successful verification for FLASH. This fact reveals  the weakness of automatical tool in the parameterized verification.  Third, further  efforts are still needed for clear mechanization. As argued in \cite{Chou2004}, ``the first priority is clearly mechanization. Ideally, we want to formalize not only the reasoning
+To sum up,  FLASH is a hard  benchmark with significance for any proposed method for parameterized verification. First, it is a cache coherence protocol in real-world, which is  the most important landmark in this field.  As Chou, Mannava, Park pointed out in their FMCAD 2004 paper \cite{Chou2004}, ï¿½ï¿½if the method works on FLASH, then there is a good chance that it will also work on many real-world cache coherence protocolsï¿½ï¿½. Second
+FLASH protocol is  sufficiently hard that only two or three methods have  fully verified
+the protocol parametrically. However, human guidance still plays a key role in the above successful verification work for FLASH. This fact reveals  the weakness of automatical tool in the parameterized verification.  Third, further  efforts are still needed for clear mechanization. As argued in \cite{Chou2004}, ``the first priority is clearly mechanization. Ideally, we want to formalize not only the reasoning
 steps  but also the theory developed in a theorem
-prover, so that we can have a completely formal proof". Therefore it is preferable to  have a completely formal proof for verification of FLASH in a well-known theorem prover. Previous work is too far away from giving a formal proof for FLASH. Even for a moderate case GERMAN protocol, which is much simpler than FLASH, no formal proof is not available yet. Let alone FLASH.
+prover, so that we can have a completely formal proof". Therefore, it is preferable to  have a completely formal proof for verification of FLASH in a well-known theorem prover. Previous work is too far away from giving a formal proof for FLASH. Even for a moderate case GERMAN protocol, which is much simpler than FLASH, no formal proof is not available yet. Let alone FLASH.
 
 
-The aim of this paper is to apply {\sf paraVerifier} to a  parameterized verification of FLASH protocol in both an automatical and rigorous way. In detail,
+The aim of this paper is to apply {\sf paraVerifier}\cite{liatva2015} to a  parameterized verification of FLASH protocol in both an automatical and rigorous way. In detail,
 \begin{itemize}
 \item Interesting auxiliary invariants can be found by {\sf paraVerifier} automatically. Our invariants are visible, which can characterize the semantical features of FLASH, and help people to precisely understand the design of   FLASH.
 
@@ -201,14 +201,14 @@ The organization of this work is as follows: Section \ref{sec:Preliminaries} int
 %=========================================
 \section{The Background  of {\sf paraVerifier}\label{sec:Preliminaries}}
 %=========================================
-{\sf paraVerifier} is devoted to the parameterized verification of a protocol. Usually the tool is used to prove the correctness of the protocol after model checking or testing techniques have been used to verify that typical protocol instances of the protocol  is bug-free. There is still a big gap between the bug-freeness in quite a small number of instances between the correctness in all instances.  Ideally, a proof is preferable to be given to  prove that the correctness holds for any instance. It is a formal proof in a theorem prover that {\sf paraVerifier} generates to verify the protocol. In order to achieve this aim, {\sf paraVerifier} is designed with the following features.
+{\sf paraVerifier} is devoted to the parameterized verification of a protocol. Usually, the tool is used to prove the correctness of the protocol after model checking or testing techniques have been used to verify that typical protocol instances of the protocol  are bug-free. There is still a big gap between the bug-freeness in quite a small number of instances between the correctness in all instances.  Ideally, a proof is preferable to be given to  prove that the correctness holds for any instance. It is a formal proof in a theorem prover that {\sf paraVerifier} generates to verify the protocol. In order to achieve this aim, {\sf paraVerifier} is designed with the following features.
 
 \paragraph{Theoretical foundation}  {\sf paraVerifier} is based on a simple but elegant theory.  Three kinds of causal
 relations among a rule and an invariant and a set of invariants are introduced, which are
 essentially special cases of the general induction rule. Then, a
-so-called consistency lemma is proposed, which is the cornerstone in
+so-called consistency lemma is proposed, which is the cornerstone of 
 our method. Especially, the theory foundation itself is  verified as a
-formal theory in Isabelle, which is the formal library for verifying protocol case studies. The library provides basic types and constant definitions to model protocol cases and lemmas to prove  properties.  Therefore, the theoretical foundation itself is verified in Isabelle. Thus it is the most rigorous.
+formal theory in Isabelle, which is the formal library for verifying protocol case studies. The library provides basic types and constant definitions  and lemmas to model protocol cases and to prove  properties.  Therefore, the theoretical foundation itself is verified in Isabelle. Thus, it is the most rigorous.
 
 Tool {\sf paraVerifier} is composed of two parts:  an invariant finder {\tt invFinder}
 and a proof generator {\tt proofGen}. An overview of our method is  illustrated in Fig.~\ref{fig:arch}.
@@ -227,11 +227,11 @@ and a proof generator {\tt proofGen}. An overview of our method is  illustrated 
 %invariant $inv$ holds for any parameterizd instance of a protocol.
 Given a protocol $\mathcal{P}$ and a property $inv$,  written in
 a Murphi  file {\tt prot.m}, is compiled into an internal form {\sf prot.ml}, then fed into the
-\texttt{invFinder}. {\tt invFinder} automatically transform the Murphi file into internal formal model in Ocaml, then tries to find useful auxiliary invariants and causal relations which are capable of proving $inv$. To construct auxiliary invariants and causal relations, we employ heuristics inspired by consistency relation. Also, when several candidate invariants are obtained using the heuristics, we use oracles such as NuSMV and Murphi model checker and an SMT-solver to check each of them under a small reference model of $\mathcal{P}$, and chooses the one that has been verified in the oracles. A table {\tt prot.tbl} is worked out  to store the set of ground invariants and
+\texttt{invFinder}. {\tt invFinder} automatically transform the Murphi file into the internal formal model in Ocaml, then tries to find useful auxiliary invariants and causal relations which are capable of proving $inv$. To construct auxiliary invariants and causal relations, we employ heuristics inspired by consistency relation. Also, when several candidate invariants are obtained using the heuristics, we use oracles such as NuSMV and Murphi model checker and an SMT-solver to check each of them under a small reference model of $\mathcal{P}$, and chooses the one that has been verified in the oracles. A table {\tt prot.tbl} is worked out  to store the set of ground invariants and
  causal relations.
 
 
-\paragraph{proofGen} For the auxiliary invariants and causal relations stored in table {\tt prot.tbl}, {\tt proofGen} generalizes them  into a parameterized form, which are then used to construct a completely parameterized formal proof in a theorem prover (e.g., Isabelle) to model $\mathcal{P}$ and to prove the property $inv$. After the base theory is imported, the generated proof is checked automatically.  Usually, a proof is done interactively. Special efforts in the design of the proof generation are made in order to make the proof checking automatically.
+\paragraph{proofGen} For the auxiliary invariants and causal relations stored in table {\tt prot.tbl}, {\tt proofGen} generalizes them  into  parameterized forms, which are then used to construct a completely parameterized formal proof in a theorem prover (e.g., Isabelle) to model $\mathcal{P}$ and to prove the property $inv$. After the base theory is imported, the generated proof is checked automatically.  Usually, a proof is done interactively. Special efforts in the design of the proof generation are made in order to make the proof checking automatically.
 
 
 
@@ -252,11 +252,11 @@ shared (readable), or exclusive (readable and writable). There are typical kinds
 
 \begin{description}
 \item[READ-Transaction]
-If a read miss occurs in a processor where state of cache is invalid, the corresponding node sends out a GET request to the
+If a read miss occurs in a processor where the state of its cache is invalid, the corresponding node sends out a GET request to the
 home (this step is not necessary if the requesting processor is in the home). Receiving the
 GET request, the home consults the directory corresponding to the memory line to decide
 what action the home should take. If the line is pending, meaning that another request
-is already being processed, the home sends a NAK (negative acknowledgment) to the
+is already being processed, the home sends an NAK (negative acknowledgment) to the
 requesting node. If the directory indicates there is a dirty copy in a remote node, then the
 home forwards the GET to that node. Otherwise, the home grants the request by sending
 a PUT to the requesting node and updates the directory properly. When the requesting
@@ -266,11 +266,11 @@ its cache state to shared and proceeds to read.
 \item[WRITE-Transaction]
 For a write miss, the corresponding node sends out a GETX request to the home.
 Receiving the GETX request, the home consults the directory. If the line is pending,
-the home sends a NAK to the requesting node. If the directory indicates there is a dirty
+the home sends an NAK to the requesting node. If the directory indicates there is a dirty
 copy in a third node, then the home forwards the GETX to that node. If the directory
 indicates there are shared copies of the memory line in other nodes, the home sends
 INVs (invalidations) to those nodes. At this point, the protocol depends on which of two
-modes the multiprocessor is running in: EAGER or DELAYED. In EAGER mode, the home
+modes the multiprocessor is running in EAGER or DELAYED. In EAGER mode, the home
 grants the request by sending a PUTX to the requesting node; in DELAYED mode, this
 grant is deferred until all the invalidation acknowledgments are received by the home. If
 there are no shared copies, the home sends a PUTX to the requesting node and updates
@@ -282,7 +282,7 @@ exclusive and proceeds to write.
 
 
 %During the read miss transaction, an operation called a sharing write-back is necessary
-%in the following ¡°three hop¡± case. This occurs when a remote processor in node R1
+%in the following ï¿½ï¿½three hopï¿½ï¿½ case. This occurs when a remote processor in node R1
 %needs a shared copy of a memory line, an exclusive copy of which is in another remote
 %node R2. When the GET request from R1 arrives at the home H, the home consults the
 %directory to find that the line is dirty in R2. Then H forwards the GET to R2 with the shared copy of a memory line, an exclusive copy of which is in another remote
@@ -307,12 +307,12 @@ exclusive and proceeds to write.
 
 %
 
-Usually, only an informal  account of FLASH is provided in most previous work as shown in the above paragraph.   It is still not very clear to most readers, especially to the novel who are not very familiar with FLASH. Its is very desirable for people to have some flow-charts each of  which is a series of rules executed to complete a READ/WRITE transaction. From such a flow, who execute transition rules and exchange messages to implement the designed protocol goals. How rules are executed in some special causal order to finish a transaction? How do transactions of different nodes are synchronized with some mechanism to guarantee  important properties? Here we adopt a novel data flow chart to illustrate a case of READ (or WRITE) transaction, as shown below:
+Usually, only an informal  account of FLASH is provided in most previous work as shown in the above paragraph.   It is still not very clear to most readers, especially in the novel who are not very familiar with FLASH. Its is very desirable for people to have some flow-charts each of  which is a series of rules executed to complete a READ/WRITE transaction. From such a flow, who execute transition rules and exchange messages to implement the designed protocol goals. How  are rules executed in some special causal order to finish a transaction? How do transactions of different nodes are synchronized with some mechanism to guarantee  important properties? Here we adopt a novel data flow chart to illustrate a case of READ (or WRITE) transaction, as shown below:
 
 
 
-\subsection{Flow}
- Formally, a transaction flow is a structure, which can be formalized by pair $<R \times N, \rightarrow \cup \Rightarrow>$, where $(r,i) \in R \times N$ is a  node, indicating an client $i$ performs an action of executing a rule $r$. Relations  $\rightarrow$  and $\Rightarrow$ are two   orders over $R \times N$. $(r_1,i_1) \rightarrow (r_2,i_2) \equiv \exists v~e. (v:=e) \in \mathsf{act}(r_1) \land (v=e) \in decompose(guard(r_2))$. Here $v:=e$ is an assignment; $\mathsf{act}$ is the set of assignments of an action of a rule; A formula $f$ in conjunction form can be composed into a set of sub-formulas $f_i$, denoted as $decompose(f)$, such that each $f_i$ is not of a conjunction form and $f$ is semantically equivalent to $f_1 \land f_2 \land ... \land f_N$. Intuitively $(r_1,i_1) \rightarrow (r_2,i_2)$ means that the triggering of agent $i_2$ executing $r_2$ needs the completion of agent $i_1$ executing $r_1$; $(r_1,i_1) \Rightarrow (r_2,i_1)$ means that agent $i_1$'s action of executing $r_2$ follows the completion of  executing $r_1$. A classical three-hop flow case of a READ-transaction is shown as follows:
+\subsection{A Flow Chart}
+ Formally, a transaction flow is a structure, which can be formalized by a pair $<R \times N, \rightarrow \cup \Rightarrow>$, where $(r,i) \in R \times N$ is a  node, indicating a client $i$ performs an action of executing a rule $r$. Relations  $\rightarrow$  and $\Rightarrow$ are two   orders over $R \times N$. $(r_1,i_1) \rightarrow (r_2,i_2) \equiv \exists v~e. (v:=e) \in \mathsf{act}(r_1) \land (v=e) \in decompose(guard(r_2))$. Here $v:=e$ is an assignment; $\mathsf{act}$ is the set of assignments of an action of a rule; A formula $f$ in conjunction form can be composed of a set of sub-formulas $f_i$, denoted as $decompose(f)$, such that each $f_i$  is not of a conjunction form and $f$ is semantically equivalent to $f_1 \land f_2 \land ... \land f_N$. Intuitively $(r_1,i_1) \rightarrow (r_2,i_2)$ means that the triggering of agent $i_2$ executing $r_2$ needs the completion of agent $i_1$ executing $r_1$; $(r_1,i_1) \Rightarrow (r_2,i_1)$ means that agent $i_1$'s action of executing $r_2$ follows the completion of  executing $r_1$. A classical three-hop flow case of an READ-transaction is shown as follows:
 
 
 \begin{figure}[htbp]
@@ -740,5 +740,5 @@ core of our work, which gives the heuristics to guide the tool
  In the future, we want to extend our work in the following two directions: (1) We want to automate the CMP-method in \cite{Chou2004} by adopting our invariants. We believe that our invariant should be enough to strenthen   guards of the rules of the abstract node; (2) We want to relate the predicate-abstraction with our work. By assigning proper predicates, we can construct the abstract version of the protocol, which can be regarded as a specification of the protocol. The original FLASH is regarded as the implementation of the specification. Our invariants should be very useful in proving the refinement between the implementation and specification.
 
 \bibliographystyle{splncsnat}
-\bibliography{gste,cache,refer}
+\bibliography{gste,cache,refer,lvyi}
 \end{document}
