@@ -339,9 +339,9 @@ NI\_Remote\_Get\_Put, sets its copy to shared state and issues a PUT to $src$ co
 
 \item   When $home$ receives this SHWB message, it executes the rule NI\_ShWb, and
  writes the received
-data back to main memory and puts $src$ on the sharer list.
+data back to main memory and puts $src$ on the sharers' list.
 
-\item When $dst$ receives this PUT message, it executes the rule NI\_Remote\_Put. If there is not another INV message, then it   uses the received data to update its cache line, and sets its cache to shared state.
+\item When $dst$ receives this PUT message, it executes the rule NI\_Remote\_Put. If there is not another INV message, then it   uses the received data to update its cache line and sets its cache to shared state.
 
 
 \end{enumerate}
@@ -361,12 +361,13 @@ Compared with a textual description, a flow description has the advantage that (
 %=========================================
 \section{Formal Description of FLASH in Murphi\label{sec:formalDescription}}
 %=========================================
-A formal protocol model includes a set of parameterized transition rules and properties.  Here we adopt a version of FLASH similar to that in \cite{cubeicBeyond}, which is different from the version in \cite{Chou2004}. The difference between them lies in the modelling of behaviors of a Home node. Behaviours of the Home node is not identical to those of the other nodes, while behaviors of
- a non-Home node is identical to that of the other non-Home node. In the model of work in \cite{Chou2004}, state variables of the Home node and non-Home nodes are both array-variables. This modelling has a shortage of destroying the symmetry between indices which represents identifiers for agents.
+A formal protocol model includes a set of parameterized transition rules and properties.  Here we adopt a version of FLASH similar to that in \cite{cubeicBeyond}, which is different from the version in \cite{Chou2004}. The difference between them lies in the modeling of behaviors of a Home node. Behaviours of the Home node is not identical to those of the other nodes while behaviors of
+ a non-Home node are identical to those of the other non-Home node. In the model of work in \cite{Chou2004}, state variables of the Home node and non-Home nodes are both array-variables. This modeling has a shortage of destroying the symmetry between indices which represents identifiers for agents.
 
-In our modelling, the symmetry between indices should be preserved and will be used in {\sf paraVerifier}. Namely  A  state variable $a$ on non-Home nodes are stored in array-variables. Some parameterized variable $a[i]$ records some state on $a$ of node $i$. Home is not an explicitly index to reference a node in our model. State of
- the Home node on $a$ is recorded as global  (or non-parameterized variable) $Homea$. %Index variable $v$ to represent some index of a node is only for non-Home nodes. We explicitly introduce an extra variable $Homev$ to identify the case when the node index should be $Home$.
- Being consistent with the above philosphy, our FLASH in Murphi is changed accordingly. For instance, we compare the original version in \cite{Chou2004}, which is shown in (a), with our version, which is shown in (b):
+In our modeling, the symmetry between indices should be preserved and will be used in {\sf paraVerifier}. Namely,  %a  state variable $a$ on non-Home nodes are stored in array-variables. 
+some parameterized variable $a[i]$ records some state  $a$ of node $i$. Home is not an explicit index to reference a node in our model. State of
+  $a$ of the Home node  is recorded as a global  (or non-parameterized) variable $Homea$. %Index variable $v$ to represent some index of a node is only for non-Home nodes. We explicitly introduce an extra variable $Homev$ to identify the case when the node index should be $Home$.
+ Being consistent with the above philosophy, our FLASH in Murphi is changed accordingly. For instance, we compare the original version in \cite{Chou2004}, which is shown in (a), with our version, which is shown in (b):
 
 \begin{multicols}{2}
 \begin{specification}\\
@@ -463,11 +464,11 @@ invariant "MemDataProp"\\
   !((Sta.Dir.Dirty = FALSE) \& (!(Sta.MemData = Sta.CurrData)));\\
 \end{specification}\\
 
-The former two properties are the mutual-exclusion properties between  cache state status of two nodes. The last is the  consistency property on data.
+The former two properties are the mutual-exclusion properties between  cache state status of two nodes. The last is the  data property.
 
 %=========================================
 \section{Verifying FLASH by {\sf paraVerifer} \label{sec:experiments}}
-For cache coherence protocols like MESI or German protocols with small scales,   {\sf paraVerifier}  is easy to use to verify automatically them. A Murphi file is only provided as a formal model, which contain both the protocol and properties under verification. The Murphi model will be automatically transformed into not only an internal model, but also a SMV-smodel. NuSMV will be called to compute the reachable set of the SMV-model. The internal model will be used by the {\sf invFinder} to generate auxiliary invariants. During this generation procedure, a set of candidate invariant formulas are generated in one step, and only one is chosen  if it is an invariant by checking the reachable set of   SMV-model. The oracle of the SMV-model is automatically generated inside the {\sf inVfinder} without human intervention.
+For cache coherence protocols like MESI or German protocols with small scales,   {\sf paraVerifier}  is easy to use to verify automatically them. A Murphi file is only provided as a formal model, which contain both the protocol and properties under verification. The Murphi model will be automatically transformed into not only an internal model but also an SMV-model. NuSMV will be called to compute the reachable set of the SMV-model. The internal model will be used by the {\sf invFinder} to generate auxiliary invariants. During this generation procedure, a set of candidate invariant formulas are generated in one step, and only one is chosen  if it is an invariant by checking the reachable set of   SMV-model. The oracle of the SMV-model is automatically generated inside the {\sf inVfinder} without human intervention.
 
 However, FLASH with data path is a real world protocol with industry scale. For a FLASH   instance configuration size NODENUM=3 ana DATANUM=2, the protocol is so complex that NuSMV can't compute the reachable state set of the SMV-model which is generated by {\sf invFinder} in a computing server with ?. In fact, this problem of  state explosion is the main obstacle to the applying previous automatical solutions such as \cite{Arons2001,Lv2007} to the parameterized verification of FLASH. For instance, a reachable state set of a protocol instance of FLASH is need in both the work in \cite{Arons2001,Lv2007}. The former needs the reachable state set to compute the so-called ``invisible inductive invariants" for deductive theorem proving. The latter needs it to strengthen
  the guards of rule for an counter-example guided refinement of an abstract protocol. Due to the non-availability of the necessary the reachable state set of a proper instance of FLASH, the above two approach both fail.
