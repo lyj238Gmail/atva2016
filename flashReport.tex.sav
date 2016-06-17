@@ -83,18 +83,8 @@
 %=========================================
 \begin{document}
 
-\title{  An Automatic Parameterized Verification of  FLASH Cache Coherence Protocol by Paraverifier}
-\titlerunning{paraVerifier: An Invariant Finder}
-\author{Yongjian Li \inst{1} \and
-        Kaiqiang Duan \inst{1} \and
-       % Shaowei Cai \inst{1} \and
-        Yi Lv \inst{1} }
-\authorrunning{Li et al.}
-\institute{
-State Key Laboratory of Computer Science,
-%Institute of Software,
-Chinese Academy of Sciences
-}
+\title{ Verification Report  of FLASH Cache Coherence Protocol by Using Paraverifier}
+
 
 \maketitle
 
@@ -338,7 +328,7 @@ Its is very desirable for people to have some flow-charts each of  which is a se
 
 
 %\subsection{A Flow Chart}
-\paragraph*{A Flow Chart} Formally, a transaction flow is a structure, which can be formalized by a pair $<R \times N, \rightarrow \cup \Rightarrow>$, where $(r,i) \in R \times N$ is a  node, indicating that a client $i$ performs an action of executing a rule $r$. Relations  $\rightarrow$  and $\Rightarrow$ are two   orders over $R \times N$. $(r_1,i_1) \rightarrow (r_2,i_2) \equiv \exists v~e. (v:=e) \in \mathsf{act}(r_1) \land (v=e) \in decompose(guard(r_2))$. Here $v:=e$ is an assignment; $\mathsf{act}$ is the set of assignments of an action of a rule; A formula $f$ in conjunction form can be composed of a set of sub-formulas $f_i$, denoted as $decompose(f)$, such that each $f_i$  is not of a conjunction form and $f$ is semantically equivalent to $f_1 \land f_2 \land ... \land f_N$. Intuitively $(r_1,i_1) \rightarrow (r_2,i_2)$ means that the triggering of agent $i_2$ executing $r_2$ needs the completion of agent $i_1$ executing $r_1$; $(r_1,i_1) \Rightarrow (r_2,i_1)$ means that agent $i_1$'s action of executing $r_2$ follows the completion of  executing $r_1$. A classical three-hop flow case of an READ-transaction including a sharing-write back is shown as follows:
+\paragraph*{A Flow Chart} Formally, a transaction flow is a well-founded graph, which can be formalized by a pair $<R \times N, \rightarrow \cup \Rightarrow>$, where $(r,i) \in R \times N$ is a  node, indicating that a client $i$ performs an action of executing a rule $r$. Relations  $\rightarrow$  and $\Rightarrow$ are two kinds of edges over $R \times N$. This kind of well-founded graph is similar to the bundle which is used to formalise a protocol execution in security protocol \cite{}. using $(r_1,i_1) \rightarrow (r_2,i_2) \equiv \exists v~e. (v:=e) \in \mathsf{act}(r_1) \land (v=e) \in decompose(guard(r_2))$. Here $v:=e$ is an assignment; $\mathsf{act}$ is the set of assignments of an action of a rule; A formula $f$ in conjunction form can be composed of a set of sub-formulas $f_i$, denoted as $decompose(f)$, such that each $f_i$  is not of a conjunction form and $f$ is semantically equivalent to $f_1 \land f_2 \land ... \land f_N$. Intuitively $(r_1,i_1) \rightarrow (r_2,i_2)$ means that the triggering of agent $i_2$ executing $r_2$ needs the completion of agent $i_1$ executing $r_1$; $(r_1,i_1) \Rightarrow (r_2,i_1)$ means that agent $i_1$'s action of executing $r_2$ follows the completion of  executing $r_1$. A classical three-hop flow case of an READ-transaction including a sharing-write back is shown as follows:
 
 \vspace{-20pt}
 \begin{figure}[htbp]
@@ -900,11 +890,11 @@ inv\_\_13 says that Sta.ShWbMsg.Data must be the same as Sta.CurrData because $d
 %=========================================
 \bedt{Safety or Security critical computer system, such as nuclear plant control system or trusted operating system, usually have the requirements of formal proof, rather than verification. These systems are often parameterized systems.} Our case study on FLASH protocol is a  typically successful \bedt{parameterized verification} of {\sf paraVerifier} which combines model checking and theorem proving. The consistency lemma basing on the induction approach is the
 core of our work, which gives the heuristics to guide the tool
- to construct candidate invariants. By using NuSMV or Murphi to model check  candidate invariants, true invariants are  chosen.  By generalizing the invariants into a parameterized form, {\sf paraVerifier} generates automatically a proof script to  prove the protocol. Again, the consistency lemma is used as a main theorem to prove all the invariants. Searching invariants and proof generation are both automatic. The ultimate correctness is gurantteed by a mechanical proof in a theorem prover. Therefore, we \bedt{achieve} the two goals set up in Section \ref{sec:introduction}: verifying FLASH protocol in both an automatic and rigorous way.
+ to construct candidate invariants. By using NuSMV or Murphi to model check  candidate invariants, true invariants are  chosen.  By generalizing the invariants into a parameterized form, {\sf paraVerifier} generates automatically a proof script to  prove the protocol. Again, the consistency lemma is used as a main theorem to prove all the invariants. Searching invariants and proof generation are both automatic. The ultimate correctness is guaranteed by a mechanical proof in a theorem prover. Therefore, we \bedt{achieve} the two goals set up in Section \ref{sec:introduction}: verifying FLASH protocol in both an automatic and rigorous way.
 
  Compared with previous work, \bedt{these easily readable invariants in our work establish ``a chain of evidence'' for the correctness proof.} As we have discussed in Section \ref{sec:experiments} and \ref{sec:relatingWithFlow}, these invariants have shed light on the semantics of FLASH protocol. Both functions of control variables and synchronization of executing rules of different  READ-WRITE transactions. In this sense,  our understanding  is the most profound by using {\sf paraVerifier} to verify it. In fact, these invariants can be regarded as axiom semantics of FLASH protocol. %Intuitively we We have control variables and .It is also interesting to relate our approach to previous work?
 
- In the future, we want to extend our work in the following two directions: (1) We want to automate the CMP-method in \cite{Chou2004} by adopting our invariants. We believe that our invariant should be enough to strenthen   guards of the rules of the abstract node; (2) We want to relate the predicate-abstraction with our work. By assigning proper predicates, we can construct the abstract version of the protocol, which can be regarded as a specification of the protocol. The original FLASH protocol is regarded as the implementation of the specification. Our invariants should be very useful in proving the refinement between the implementation and specification.
+ In the future, we want to extend our work in the following two directions: (1) We want to automate the CMP-method in \cite{Chou2004} by adopting our invariants. We believe that our invariant should be enough to strengthen   guards of the rules of the abstract node; (2) We want to relate the predicate-abstraction with our work. By assigning proper predicates, we can construct the abstract version of the protocol, which can be regarded as a specification of the protocol. The original FLASH protocol is regarded as the implementation of the specification. Our invariants should be very useful in proving the refinement between the implementation and specification.
 
 
 \vspace{-3pt}

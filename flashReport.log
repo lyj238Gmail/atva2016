@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2016.2.4)  23 MAY 2016 09:40
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2016.2.4)  27 MAY 2016 08:25
 entering extended mode
-**atva16Lvyi.tex
-(C:\Users\lenovo\Documents\GitHub\atva2016\atva16Lvyi.tex
+**flashReport.tex
+(C:\Users\lenovo\Documents\GitHub\atva2016\flashReport.tex
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for loaded.
 (C:\Users\lenovo\Documents\GitHub\atva2016\llncs.cls
@@ -475,7 +475,7 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip74
 )
-(C:\Users\lenovo\Documents\GitHub\atva2016\atva16Lvyi.aux)
+(C:\Users\lenovo\Documents\GitHub\atva2016\flashReport.aux)
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 84.
 LaTeX Font Info:    ... okay on input line 84.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 84.
@@ -519,24 +519,23 @@ LaTeX Info: Redefining \ref on input line 84.
 LaTeX Info: Redefining \pageref on input line 84.
 LaTeX Info: Redefining \nameref on input line 84.
 
-(C:\Users\lenovo\Documents\GitHub\atva2016\atva16Lvyi.out)
-(C:\Users\lenovo\Documents\GitHub\atva2016\atva16Lvyi.out)
+(C:\Users\lenovo\Documents\GitHub\atva2016\flashReport.out)
+(C:\Users\lenovo\Documents\GitHub\atva2016\flashReport.out)
 \@outlinefile=\write4
-LaTeX Font Info:    Try loading font information for U+msa on input line 100.
+LaTeX Font Info:    Try loading font information for U+msa on input line 90.
 
 (C:\CTEX\MiKTeX\tex\latex\amsfonts\umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 100.
+LaTeX Font Info:    Try loading font information for U+msb on input line 90.
 
 (C:\CTEX\MiKTeX\tex\latex\amsfonts\umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+stmry on input line 100.
-
+LaTeX Font Info:    Try loading font information for U+stmry on input line 90.
 
 (C:\CTEX\MiKTeX\tex\latex\stmaryrd\ustmry.fd)
-LaTeX Font Info:    Try loading font information for U+lasy on input line 100.
+LaTeX Font Info:    Try loading font information for U+lasy on input line 90.
 
 (C:\CTEX\MiKTeX\tex\latex\base\ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
@@ -547,7 +546,7 @@ Underfull \vbox (badness 5105) has occurred while \output is active []
 
  [2]
 [3]
-Overfull \hbox (41.34198pt too wide) in paragraph at lines 239--240
+Overfull \hbox (41.34198pt too wide) in paragraph at lines 229--230
 []\OT1/cmr/m/it/10 for al-l for-mu-las $\OML/cmm/m/it/10 inv \OMS/cmsy/m/n/10 2
  \OML/cmm/m/it/10 invs$ \OT1/cmr/m/it/10 and rules $\OML/cmm/m/it/10 r \OMS/cms
 y/m/n/10 2 \OML/cmm/m/it/10 rs$ \OT1/cmr/m/it/10 and al-l s-tates $\OML/cmm/m/i
@@ -558,10 +557,10 @@ OT1/cmr/m/n/10 )$
 [4] <paraVerifier.pdf, id=96, 801.99625pt x 102.3825pt>
 File: paraVerifier.pdf Graphic file (type pdf)
  <use paraVerifier.pdf>
-Package pdftex.def Info: paraVerifier.pdf used on input line 276.
+Package pdftex.def Info: paraVerifier.pdf used on input line 266.
 (pdftex.def)             Requested size: 347.12354pt x 44.31418pt.
 
-Overfull \hbox (9.76239pt too wide) in paragraph at lines 290--291
+Overfull \hbox (9.76239pt too wide) in paragraph at lines 280--281
  []\OT1/cmr/m/it/10 proofGen[] \OT1/cmr/m/n/10 For the aux-il-iary in-vari-ants
  and causal re-la-tion-s s-tored in ta-ble \OT1/cmtt/m/n/10 prot.tbl\OT1/cmr/m/
 n/10 ,
@@ -571,79 +570,79 @@ n/10 ,
 <flow2.pdf, id=161, 963.6pt x 542.025pt>
 File: flow2.pdf Graphic file (type pdf)
  <use flow2.pdf>
-Package pdftex.def Info: flow2.pdf used on input line 346.
+Package pdftex.def Info: flow2.pdf used on input line 336.
 (pdftex.def)             Requested size: 277.69987pt x 156.199pt.
 
-Overfull \hbox (11.30876pt too wide) in paragraph at lines 356--358
+Overfull \hbox (11.30876pt too wide) in paragraph at lines 346--348
 \OT1/cmr/m/n/10 for-ward-s the GET to $\OML/cmm/m/it/10 dst$ \OT1/cmr/m/n/10 by
  telling that $\OML/cmm/m/it/10 src$ \OT1/cmr/m/n/10 need-s the da-ta, and set-
 s Dir.Pending
  []
 
 [7 <C:/Users/lenovo/Documents/GitHub/atva2016/flow2.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 400--404
+Underfull \hbox (badness 10000) in paragraph at lines 390--394
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 405--413
+Underfull \hbox (badness 10000) in paragraph at lines 395--403
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 414--420
+Underfull \hbox (badness 10000) in paragraph at lines 404--410
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 434--438
+Underfull \hbox (badness 10000) in paragraph at lines 424--428
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 440--450
+Underfull \hbox (badness 10000) in paragraph at lines 430--440
 \OT1/cmtt/m/n/7 HeadPtr : NODE; HomeHeadPtr :
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 440--450
+Underfull \hbox (badness 10000) in paragraph at lines 430--440
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 451--461
+Underfull \hbox (badness 10000) in paragraph at lines 441--451
 \OT1/cmtt/m/n/7 begin   Sta.Proc[src].ProcCmd :=
  []
 
 [8]
-Underfull \hbox (badness 10000) in paragraph at lines 548--562
+Underfull \hbox (badness 10000) in paragraph at lines 538--552
 
  []
 
 [9] [10]
-Overfull \hbox (39.42621pt too wide) in paragraph at lines 658--675
+Overfull \hbox (39.42621pt too wide) in paragraph at lines 648--665
  [] 
  []
 
 
-Overfull \hbox (24.15485pt too wide) in paragraph at lines 676--679
+Overfull \hbox (24.15485pt too wide) in paragraph at lines 666--669
 []\OT1/cmr/m/n/10 From these in-vari-ants, we can know when the con-trol s-tate
  vari-able S-ta.Dir.Pending
  []
 
 
-Overfull \hbox (3.40427pt too wide) in paragraph at lines 681--682
+Overfull \hbox (3.40427pt too wide) in paragraph at lines 671--672
 []\OT1/cmr/m/n/10 In in-vari-ant 59, \OT1/cmtt/m/n/10 (Sta.UniMsg[1].Cmd = uni[
 ]get) & (Sta.UniMsg[1].Home
  []
 
 [11]
-Overfull \hbox (2.23825pt too wide) in paragraph at lines 699--714
+Overfull \hbox (2.23825pt too wide) in paragraph at lines 689--704
  [] 
  []
 
 
-Overfull \hbox (5.71132pt too wide) in paragraph at lines 716--718
+Overfull \hbox (5.71132pt too wide) in paragraph at lines 706--708
 \OT1/cmtt/m/n/10 !((Sta.Proc[2].CacheState=cache[]e)&(Sta.UniMsg[1].Cmd=uni[]pu
 tx))\OT1/cmr/m/n/10 ,
  []
@@ -651,65 +650,65 @@ tx))\OT1/cmr/m/n/10 ,
 <thy.pdf, id=234, 722.7pt x 542.025pt>
 File: thy.pdf Graphic file (type pdf)
  <use thy.pdf>
-Package pdftex.def Info: thy.pdf used on input line 732.
+Package pdftex.def Info: thy.pdf used on input line 722.
 (pdftex.def)             Requested size: 277.69987pt x 208.27086pt.
-LaTeX Font Info:    Try loading font information for OMS+cmtt on input line 745
+LaTeX Font Info:    Try loading font information for OMS+cmtt on input line 735
 .
-LaTeX Font Info:    No file OMScmtt.fd. on input line 745.
+LaTeX Font Info:    No file OMScmtt.fd. on input line 735.
 
 
 LaTeX Font Warning: Font shape `OMS/cmtt/m/n' undefined
 (Font)              using `OMS/cmsy/m/n' instead
-(Font)              for symbol `textbraceleft' on input line 745.
+(Font)              for symbol `textbraceleft' on input line 735.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 739--752
+Underfull \hbox (badness 10000) in paragraph at lines 729--742
 
  []
 
 [12] [13 <C:/Users/lenovo/Documents/GitHub/atva2016/thy.pdf>]
-Overfull \hbox (15.47719pt too wide) in paragraph at lines 809--845
+Overfull \hbox (15.47719pt too wide) in paragraph at lines 799--835
  [] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 809--845
+Underfull \hbox (badness 10000) in paragraph at lines 799--835
 
  []
 
 [14]
-Overfull \hbox (3.64444pt too wide) in paragraph at lines 872--899
+Overfull \hbox (3.64444pt too wide) in paragraph at lines 862--889
  []   
  []
 
 [15]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 995.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 985.
  [16]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 995.
- (C:\Users\lenovo\Documents\GitHub\atva2016\atva16Lvyi.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 995.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 995.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 985.
+ (C:\Users\lenovo\Documents\GitHub\atva2016\flashReport.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 985.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 985.
 
 
-Package rerunfilecheck Warning: File `atva16Lvyi.out' has changed.
+Package rerunfilecheck Warning: File `flashReport.out' has changed.
 (rerunfilecheck)                Rerun to get outlines right
 (rerunfilecheck)                or use package `bookmark'.
 
-Package rerunfilecheck Info: Checksums for `atva16Lvyi.out':
-(rerunfilecheck)             Before: D83F599F46400F4DFD68088C958654B9;764
-(rerunfilecheck)             After:  212AE351858FE72E59EE5B18DF88D623;126.
+Package rerunfilecheck Info: Checksums for `flashReport.out':
+(rerunfilecheck)             Before: E1A63B9DA2D916FD3AA2C0B53DA0A6C6;652
+(rerunfilecheck)             After:  B4314CD058D280F19AF24B592B538F99;112.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
  8663 strings out of 495354
- 118626 string characters out of 3183860
- 233417 words of memory out of 3000000
+ 118640 string characters out of 3183860
+ 233113 words of memory out of 3000000
  11629 multiletter control sequences out of 15000+200000
  14484 words of font info for 60 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 29i,8n,24p,1943b,427s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 29i,8n,24p,1944b,427s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/CTEX/MiKTeX/fon
 ts/type1/public/amsfonts/cm/cmbx12.pfb><C:/CTEX/MiKTeX/fonts/type1/public/amsfo
 nts/cm/cmbx9.pfb><C:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/
@@ -723,7 +722,7 @@ msfonts/cm/cmss12.pfb><C:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmss9.pfb>
 /cm/cmti10.pfb><C:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/CT
 EX/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt8.pfb><C:/CTEX/MiKTeX/fonts/type1/
 public/amsfonts/cm/cmtt9.pfb>
-Output written on atva16Lvyi.pdf (16 pages, 552616 bytes).
+Output written on flashReport.pdf (16 pages, 552494 bytes).
 PDF statistics:
  672 PDF objects out of 1000 (max. 8388607)
  66 named destinations out of 1000 (max. 500000)
