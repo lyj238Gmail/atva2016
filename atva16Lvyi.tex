@@ -83,7 +83,7 @@
 %=========================================
 \begin{document}
 
-\title{  An Automatic Parameterized Verification of  FLASH Cache Coherence Protocol by Paraverifier}
+\title{  An Automatic Parameterized Verification of the FLASH Cache Coherence Protocol by Paraverifier}
 \titlerunning{paraVerifier: An Invariant Finder}
 \author{Yongjian Li \inst{1} \and
         Kaiqiang Duan \inst{1} \and
@@ -102,7 +102,7 @@ Chinese Academy of Sciences
 \begin{abstract}
 %-------------------------------------------------------------------------
 The FLASH protocol is an industrial-scale cache coherence protocol, whose parameterized verification is a notoriously hard challenge to the field of formal \bedt{verification}. In this paper, we show how to verify its important properties by our tool {\sf paraverifier}. Being distinguished from any other approach, our proof product is a formal  proof with a set of inductive invariants. %by induction in Isabelle and a series of message flows which reflect the semantics of the protocol intuitively.
-\bedt{On one hand, both invariants are searched automatically and the formal proof is generated automatically in our work, thus tedious human labor can be obviated. On the other hand, the formal proof guarantees the most rigorous correctness of the parameterized verification. Besides, we make efforts to illustrate the semantic intuition behinds these invariants, thus our proof product is not only a certification of correctness, but also a comprehensive analysis report.}
+\bedt{On one hand, invariants are searched automatically and the formal proof is generated automatically in our work, thus tedious human labor can be avoided. On the other hand, the formal proof guarantees the most rigorous correctness of the parameterized verification. Besides, we make efforts to illustrate the semantic intuition behind these invariants, thus our proof product is not only a certification of correctness, but also a comprehensive analysis report.}
 %Among all the work, our work is the most automatic, and the  set of auxiliary invariants is the most complete. Both invariants are searched automatically and the formal proof is generated automatically. Besides, we make efforts to illustrate the semantic intuition behinds these invariants.
 %delay and early versions of FLASH protocol are verified, and the differences between the two versions can be reflected in the auxiliary invariants and flow charts for them found by the tool.
 
@@ -135,11 +135,11 @@ hold in any instance of the parameterized system. %The core of
 %\JP{Here, still the statement of the research problem is missing.
 %Why an invariant finder is needed (the motivation)?}
 
-FLASH protocol is a publicly-recognized challenging benchmark in the field of formal
+The FLASH protocol is a publicly-recognized challenging benchmark in the field of formal
  verification. In the pioneering work,
 Park and Dill applied the general purpose theorem prover PVS \cite{cade92-pvs}
 to   verify the protocol for arbitrary $N$ nodes \cite{Park1996a}. This is a laborious process, since they introduce a simplified  FLASH protocol with the so-called aggregated transactions, which
-is, in fact,  an abstracted version of FLASH protocol, and  need to prove
+is, in fact,  an abstracted version of the FLASH protocol, and  need to prove
 the correspondence between the abstract and the original FLASH
 protocol, and then prove the correctness of the abstracted protocol, and subsequently derive the correctness of  the
 original protocol by the correspondence. %New   auxiliary state variables like {\tt fwdSrc} are   introduced  for verification. Deep human insight for FLASH protocol is needed for both the construction of the abstracted protocol  and  introducing new state variables.
@@ -147,11 +147,11 @@ Inductive invariants are provided by \bedt{hand}, and the theorem prover must be
 %variables proposed  are reserved and needed for verification in later work.
 
 McMillan applies methods of compositional model
-checking \cite{McMillan2001} to the verification of FLASH protocol by using Cadence-SMV \cite{cadenceSMV}. %This approach has the advantage that parameterized
+checking \cite{McMillan2001} to the verification of the FLASH protocol by using Cadence-SMV \cite{cadenceSMV}. %This approach has the advantage that parameterized
 %systems can be proved correct without the need to state inductive invariants explicitly,
 %since invariant information is obtained by model checking abstract systems.
 Safety and liveness of the
-FLASH protocol are both verified. Despite the fact that SMV is designed as a model-checker to  check automatically properties, the core techniques for FLASH protocol parameterized verification adopted by McMillan is SMV's advanced features for proofs such as composition proof and temporal case splitting, and abstraction. Human interaction must be heavily relied on to  guide SMV to work, depending on his insight into FLASH protocol. Unlike a general theorem prover like Isabelle, SMV does not have a good logical foundation and mechanism to perform theorem proving process. Briefly speaking, the above proofs have the cons as follow: lacking of rigorousness as a theorem prover, rough understanding for non-specialists of SMV, as well as the limitation of generalization to other protocol case studies and implementation in general-purpose theorem provers. \forget{The above proofs are neither rigorous as a theorem prover, nor easily understood to a non-specialist of SMV.  Because these proof techniques are  only special for SMV,  they are  difficult to be generalized to other protocols and to be implemented in a general-purpose theorem prover.}
+FLASH protocol are both verified. Despite the fact that SMV is designed as a model-checker to  check automatically properties, the core techniques for the FLASH protocol parameterized verification adopted by McMillan is SMV's advanced features for proofs such as composition proof and temporal case splitting, and abstraction. Human interaction must be heavily relied on to  guide SMV to work, depending on his insight into the FLASH protocol. Unlike a general theorem prover like Isabelle, SMV does not have a good logical foundation and mechanism to perform theorem proving process. Briefly speaking, the above proofs have the cons as follow: lacking of rigorousness as a theorem prover, rough understanding for non-specialists of SMV, as well as the limitation of generalization to other protocol case studies and implementation in general-purpose theorem provers. \forget{The above proofs are neither rigorous as a theorem prover, nor easily understood to a non-specialist of SMV.  Because these proof techniques are  only special for SMV,  they are  difficult to be generalized to other protocols and to be implemented in a general-purpose theorem prover.}
 
 The CMP method, which adopts parameter abstraction and guard strengthening, is proposed
 in~\cite{Chou2004} for verifying a safety property $inv$ of
@@ -179,30 +179,30 @@ a finite instance of the system. These approximations (candidate
 invariants) are then model checked in together with the original
 safety properties. A Finite instance (even small) is regarded as
 an oracle for guiding the choice of candidate
-invariants. Auxiliary invariants are found automatically, but these auxiliary invariants are in concrete form and are not generalized to the parameterized form. Thus, there is no  parameterized proof derived for parameterized verification. Until now, we still can not find that a completely formal proof is constructed to verify the full-version of FLASH protocol by adopting the invariants computed by BRAB. %Our work differs from this work in two main points: (1) we  propose three kinds of causal relations and consistency lemmas, which guide the tool to find invariants and construct an inductive proof; (2) we also develop a system approach to generalize the found concrete invariants and causal relations into a symbolic proofs for parameterized verification. For the full version of FLASH protocol with data path, the   invariants computed by BARB are different from ours. Until now, we still can not find a completely formal proof is constructed to verify the full-version of FLAH protocol by adopting the invariants computed by BRAB.
+invariants. Auxiliary invariants are found automatically, but these auxiliary invariants are in concrete form and are not generalized to the parameterized form. Thus, there is no  parameterized proof derived for parameterized verification. Until now, we still can not find that a completely formal proof is constructed to verify the full-version of the FLASH protocol by adopting the invariants computed by BRAB. %Our work differs from this work in two main points: (1) we  propose three kinds of causal relations and consistency lemmas, which guide the tool to find invariants and construct an inductive proof; (2) we also develop a system approach to generalize the found concrete invariants and causal relations into a symbolic proofs for parameterized verification. For the full version of FLASH protocol with data path, the   invariants computed by BARB are different from ours. Until now, we still can not find a completely formal proof is constructed to verify the full-version of FLAH protocol by adopting the invariants computed by BRAB.
 
-To sum up,  FLASH protocol is a hard  benchmark with significance for any proposed method for parameterized verification. First, it is a cache coherence protocol in real-world, which is  the most important landmark in this field.  As Chou, Mannava, Park pointed out in their FMCAD 2004 paper \cite{Chou2004}, ``if the method works on FLASH protocol, then there is a good chance that it will also work on many real-world cache coherence protocols''. Second,
-FLASH protocol is  sufficiently hard that only two or three methods have  fully verified
-the protocol parametrically. However, human guidance still plays a key role in the above successful verification work for FLASH protocol. This fact reveals  the weakness of automatic tool in the parameterized verification.  Third, further  efforts are still needed for clear mechanization. As argued in \cite{Chou2004}, ``the first priority is clear mechanization. Ideally, we want to formalize not only the reasoning
+To sum up,  the FLASH protocol is a hard  benchmark with significance for any proposed method for parameterized verification. First, it is a cache coherence protocol in real-world, which is  the most important landmark in this field.  As Chou, Mannava, Park pointed out in their FMCAD 2004 paper \cite{Chou2004}, ``if the method works on the FLASH protocol, then there is a good chance that it will also work on many real-world cache coherence protocols''. Second,
+the FLASH protocol is  sufficiently hard that only two or three methods have  fully verified
+the protocol parametrically. However, human guidance still plays a key role in the above successful verification work for the FLASH protocol. This fact reveals  the weakness of automatic tool in the parameterized verification.  Third, further  efforts are still needed for clear mechanization. As argued in \cite{Chou2004}, ``the first priority is clear mechanization. Ideally, we want to formalize not only the reasoning
 steps  but also the theory developed in a theorem
-prover, so that we can have a completely formal proof''. Therefore, it is preferable to  have a completely formal proof for verification of FLASH protocol in a well-known theorem prover. Previous work is too far away from giving a formal proof for FLASH protocol. Even for a moderate case GERMAN protocol \cite{Arons2001}, which is much simpler than FLASH protocol, no formal proof is not available yet. Let alone FLASH protocol.
+prover, so that we can have a completely formal proof''. Therefore, it is preferable to  have a completely formal proof for verification of the  FLASH protocol in a well-known theorem prover. Previous work is too far away from giving a formal proof for the FLASH protocol. Even for a moderate case GERMAN protocol \cite{Arons2001}, which is much simpler than the FLASH protocol, no formal proof is not available yet. Let alone the FLASH protocol.
 
 
-The aim of this paper is to apply {\sf paraVerifier} \cite{liatva2015} to a  parameterized verification of FLASH protocol in both an automatic and rigorous way. In detail,
+The aim of this paper is to apply {\sf paraVerifier} \cite{liatva2015} to a  parameterized verification of the FLASH protocol in both an automatic and rigorous way. In detail,
 \begin{itemize}
-\item Interesting auxiliary invariants can be  automatically found by {\sf paraVerifier}. Our invariants are \bedt{easily readable}, which can characterize the semantic features of FLASH protocol, and help people to precisely understand the design of   FLASH protocol.
+\item Interesting auxiliary invariants can be  automatically found by {\sf paraVerifier}. Our invariants are \bedt{easily readable}, which can characterize the semantic features of the FLASH protocol, and help people to precisely understand the design of the  FLASH protocol.
 
-\item With the help of {\sf paraVerifier}, a formal proof can be constructed automatically as a product of a parameterized verification of FLASH protocol. The formal proof script not  only models the protocol rigorously and specifies its properties without any ambiguity, but also proves them mechanically in the theorem prover. Therefore, it helps us to achieve the highest possible assurance for the correctness of FLASH protocol.
+\item With the help of {\sf paraVerifier}, a formal proof can be constructed automatically as a product of a parameterized verification of the FLASH protocol. The formal proof script not  only models the protocol rigorously and specifies its properties without any ambiguity, but also proves them mechanically in the theorem prover. Therefore, it helps us to achieve the highest possible assurance for the correctness of the FLASH protocol.
 
 
 \end{itemize}
 
-The organization of this work is as follows: Section \ref{sec:Preliminaries} introduces the background of {\sf paraVerifier}; Section  \ref{sec:informalOfFLASH} introduces informally FLASH protocol; Section \ref{sec:formalDescription} introduces our FLASH protocol model in Murphi \bedt{language} \cite{Dill1996}; Section \ref{sec:experiments} shows our verification experiments in detail. Notably we introduce some \bedt{specific techniques} used in our experiments: oracles of simplified version and hybrid oracles, and distributing oracles. Section \ref{sec:relatingWithFlow} tries to explain meanings of inductive invariants with a flow.  Section \ref{sec:conclusion} concludes our work.
+The organization of this work is as follows: Section \ref{sec:Preliminaries} introduces the background of {\sf paraVerifier}; Section  \ref{sec:informalOfFLASH} introduces informally the FLASH protocol; Section \ref{sec:formalDescription} introduces our FLASH protocol model in Murphi \bedt{language} \cite{Dill1996}; Section \ref{sec:experiments} shows our verification experiments in detail. Notably we introduce some \bedt{specific techniques} used in our experiments: oracles of simplified version and hybrid oracles, and distributing oracles. Section \ref{sec:relatingWithFlow} tries to explain meanings of inductive invariants with a flow.  Section \ref{sec:conclusion} concludes our work.
 
 %=========================================
 \section{The Background  of {\sf paraVerifier}\label{sec:Preliminaries}}
 %=========================================
-{\sf paraVerifier} is devoted to the parameterized verification of a protocol. Usually, the tool is used to prove the correctness of the protocol after model checking or testing techniques have been used to verify that typical protocol instances of the protocol  are bug-free. There is still a big gap between the bug-freeness in quite a small number of instances between the correctness in all instances.  Ideally, a proof is preferable to be given to  prove that the correctness holds for any instance. It is a formal proof in a theorem prover that {\sf paraVerifier} generates to verify the protocol. %In order to achieve this aim, {\sf paraVerifier} is designed with the following features.
+{\sf paraVerifier} is devoted to the parameterized verification of a protocol. Usually, the tool is used to prove the correctness of the protocol after model checking or testing techniques have been used to verify that typical protocol instances of the protocol  are bug-free. There is still a big gap between the bug-freeness in quite a small number of instances and the correctness in all instances.  Ideally, a proof is preferable to be given to  prove that the correctness holds for any instance. It is a formal proof in a theorem prover that {\sf paraVerifier} generates to verify the protocol. %In order to achieve this aim, {\sf paraVerifier} is designed with the following features.
 
 \paragraph{Theoretical foundation}  {\sf paraVerifier} is based on a simple but elegant theory.  %Three kinds of causal
 %relations among a rule and an invariant and a set of invariants are introduced, which are
@@ -252,7 +252,7 @@ so-called consistency lemma is proposed, as shown below:
 
 
 
-In order to  apply the consistency lemma to prove that a given property $inv$ (e.g., the mutual exclusion property) holds for each reachable state of a protocol $P=(inis,rs)$ (e.g., FLASH  protocol), we need to solve two problems. First, we need to construct a set of auxiliary invariants $invs$ which contains $inv$ and satisfies  $\mathsf{consistent}( invs, inis, rs)$.  By applying the consistency lemma, we  decompose the original problem of invariant checking into that of checking the causal relation between some $f\in invs$ and $r \in rs$. The latter needs   case analysis on the form of $f$ and $r$.  Only if a proof script contains sufficient information on the case splitting and  the kind of causal relation to be checked in each subcase, Isabelle can help us to automatically  check it. How to  generate automatically such a proof is the second problem.
+In order to  apply the consistency lemma to prove that a given property $inv$ (e.g., the mutual exclusion property) holds for each reachable state of a protocol $P=(inis,rs)$ (e.g., the FLASH  protocol), we need to solve two problems. First, we need to construct a set of auxiliary invariants $invs$ which contains $inv$ and satisfies  $\mathsf{consistent}( invs, inis, rs)$.  By applying the consistency lemma, we  decompose the original problem of invariant checking into that of checking the causal relation between some $f\in invs$ and $r \in rs$. The latter needs   case analysis on the form of $f$ and $r$.  Only if a proof script contains sufficient information on the case splitting and  the kind of causal relation to be checked in each subcase, Isabelle can help us to automatically  check it. How to  generate automatically such a proof is the second problem.
 
 Our solutions to the two problems are as follows:
 Given a protocol,  \texttt{invFinder} finds all the necessary ground auxiliary invariants from a small instance of the protocol in Murphi. This step solves the first  problem.
@@ -293,11 +293,11 @@ a Murphi  file {\tt prot.m}, is compiled into an internal form {\sf prot.ml}, th
 
 
 %\vspace{-0.2cm}
-\section{Informal Account of FLASH Protocol\label{sec:informalOfFLASH}}
+\section{Informal Account of the FLASH Protocol\label{sec:informalOfFLASH}}
 %\vspace{-0.2cm}
 %\subsection{A textual description}
-\paragraph*{A textual description}Firstly we give a classical textual description, which is directly cited from the material in \cite{Park2000} to informally introduce FLASH protocol.
-FLASH protocols is a directory-based one which supports a large number of distributed processing nodes. Each cache line-sized block in memory is associated with directory header which keeps information about the \bedt{cache} line. Each memory address has a home node. Each cache line-sized block in memory is associated
+\paragraph*{A textual description}Firstly we give a classical textual description, which is directly cited from the material in \cite{Park2000} to informally introduce the FLASH protocol. 
+It is a directory-based one which supports a large number of distributed processing nodes. Each cache line-sized block in memory is associated with directory header which keeps information about the \bedt{cache} line. Each memory address has a home node. Each cache line-sized block in memory is associated
 with a directory header which keeps information about the \bedt{cache} line. For a memory \bedt{address}, the
 node on which that piece of memory is physically located is called the home; the other
 nodes are called remote. The home maintains all the information about memory in
@@ -332,13 +332,14 @@ exclusive and proceeds to write.
 
 %\vspace{-10pt}
 
-Usually, only an \bedt{(in)formal}  account of FLASH protocol, as shown above, is provided in most previous work.   It is still not very clear to most readers. %, especially in the novel who are not very familiar with FLASH protocol.
-Its is very desirable for people to have some flow-charts each of  which is a series of rules executed to complete a READ/WRITE transaction. Such a flow shows: Who do execute transition rules? How  are rules executed in some special causal order to finish a transaction? How are transactions of different nodes  synchronized with some mechanism to guarantee  important properties? %Here we adopt a novel data flow chart to illustrate a case of READ (or WRITE) transaction.%, as shown below:  and exchange messages to implement the designed protocol goals.
+Usually, only an \bedt{(in)formal}  account of the FLASH protocol, as shown above, is provided in most previous work.   It is still not very clear to most readers. %, especially in the novel who are not very familiar with FLASH protocol.
+It is very desirable for people to have some flow-charts each of  which is a series of rules executed to complete a READ/WRITE transaction. Such a flow shows: Who do execute transition rules? How  are rules executed in some special causal order to finish a transaction? How are transactions of different nodes  synchronized with some mechanism to guarantee  important properties? %Here we adopt a novel data flow chart to illustrate a case of READ (or WRITE) transaction.%, as shown below:  and exchange messages to implement the designed protocol goals.
 
 
 
 %\subsection{A Flow Chart}
-\paragraph*{A Flow Chart} Formally, a transaction flow is a structure, which can be formalized by a pair $<R \times N, \rightarrow \cup \Rightarrow>$, where $(r,i) \in R \times N$ is a  node, indicating that a client $i$ performs an action of executing a rule $r$. Relations  $\rightarrow$  and $\Rightarrow$ are two   orders over $R \times N$. $(r_1,i_1) \rightarrow (r_2,i_2) \equiv \exists v~e. (v:=e) \in \mathsf{act}(r_1) \land (v=e) \in decompose(guard(r_2))$. Here $v:=e$ is an assignment; $\mathsf{act}$ is the set of assignments of an action of a rule; A formula $f$ in conjunction form can be composed of a set of sub-formulas $f_i$, denoted as $decompose(f)$, such that each $f_i$  is not of a conjunction form and $f$ is semantically equivalent to $f_1 \land f_2 \land ... \land f_N$. Intuitively $(r_1,i_1) \rightarrow (r_2,i_2)$ means that the triggering of agent $i_2$ executing $r_2$ needs the completion of agent $i_1$ executing $r_1$; $(r_1,i_1) \Rightarrow (r_2,i_1)$ means that agent $i_1$'s action of executing $r_2$ follows the completion of  executing $r_1$. A classical three-hop flow case of an READ-transaction including a sharing-write back is shown as follows:
+\paragraph*{A Flow Chart}Formally, a transaction flow is a well-founded graph, which can be formalized by a pair $<R \times N, \rightarrow \cup \Rightarrow>$, where $(r,i) \in R \times N$ is a  node, indicating that a client $i$ performs an action of executing a rule $r$. Relations  $\rightarrow$  and $\Rightarrow$ are two kinds of edges over $R \times N$. This kind of well-founded graph is similar to the bundle which is used to formalise a protocol execution in security protocol \cite{}.   $(r_1,i_1) \rightarrow (r_2,i_2) \equiv \exists v~e. (v:=e) \in \mathsf{act}(r_1) \land (v=e) \in decompose(guard(r_2))$. Here $v:=e$ is an assignment; $\mathsf{act}$ is the set of assignments of an action of a rule; A formula $f$ in conjunction form can be composed of a set of sub-formulas $f_i$, denoted as $decompose(f)$, such that each $f_i$  is not of a conjunction form and $f$ is semantically equivalent to $f_1 \land f_2 \land ... \land f_N$. Intuitively $(r_1,i_1) \rightarrow (r_2,i_2)$ means that the triggering of agent $i_2$ executing $r_2$ needs the completion of agent $i_1$ executing $r_1$; $(r_1,i_1) \Rightarrow (r_2,i_1)$ means that agent $i_1$'s action of executing $r_2$ follows the completion of  executing $r_1$. A classical three-hop flow case of a READ-transaction including a sharing-write back is shown as follows:
+ 
 
 \vspace{-20pt}
 \begin{figure}[htbp]
@@ -349,12 +350,12 @@ Its is very desirable for people to have some flow-charts each of  which is a se
 \end{figure}
 \vspace{-15pt}
 
-This flow is finished by the following steps:
+This flow consists of the following steps:
 \begin{enumerate}[noitemsep,nolistsep]
 \item An idle remote  client $src$ needs a shared copy of a memory line, executes   rule PI\_Remote\_Get, and  sends the GET request to home.
 
 \item  When the GET request from $src$ arrives at the
-home, the home consults the directory to find that the line is dirty in $dst$,  executes rule NI\_Lcal\_Get\_Get: forwards the GET to $dst$ by telling that $src$ needs the data, and sets Dir.Pending TRUE to make no any other node's request to be processed during the sharing write-back procedure.
+home, the home consults the directory to find that the line is dirty in $dst$,  executes rule NI\_Lcal\_Get\_Get: forwards the GET to $dst$ by telling that $src$ needs the data, and sets Dir.Pending TRUE to make no  other node's request to be processed during the sharing write-back procedure.
 
 \item  When $dst$ receives the forwarded GET, the
 processor $dst$ executes rule \\
@@ -370,7 +371,7 @@ data back  to main memory and puts $src$ on the sharers' list.
 
 \end{enumerate}
 
-Compared with a textual description, a flow description has the advantage that (1) causal order relations between agents' executing rules are illustrated clearly; (2) communications between agents are also illustrated. In section \ref{sec:experiments} and \ref{sec:relatingWithFlow} we combine steps in a flow with auxiliary inductive invariants, by which we can make it clear that how  FLASH protocol guarantee the synchronization between different clients. Formally, auxiliary inductive invariants will show    the synchronization mechanism in logical formulas. It is also noteworthy that the purpose about the flow in our paper is completely different with \cite{Talupur2008a}. In \cite{Talupur2008a}, the flow message is recognized by people manually and is used as flow invariants to assist the verification. As comparison, we extract the flow knowledge  to help user better understanding the system with the generated invariants.
+Compared with a textual description, a flow description has the advantage that (1) causal order relations between agents' executing rules are illustrated clearly; (2) communications between agents are also illustrated. In section \ref{sec:experiments} and \ref{sec:relatingWithFlow} we combine steps in a flow with auxiliary inductive invariants, by which we can make it clear  how the FLASH protocol guarantees the synchronization between different clients. Formally, auxiliary inductive invariants will show    the synchronization mechanism in logical formulas. It is also noteworthy that the purpose about the flow in our paper is completely different with \cite{Talupur2008a}. In \cite{Talupur2008a}, the flow message is recognized by people manually and is used as flow invariants to assist the verification. As comparison, we extract the flow knowledge  to help user better understanding the system with the generated invariants.
 
 %Usually, the above informal paper account of
 %\begin{description}
@@ -383,15 +384,15 @@ Compared with a textual description, a flow description has the advantage that (
 
 
 %=========================================
-\section{Formal Description of FLASH protocol in Murphi\label{sec:formalDescription}}
+\section{Formal Description of the FLASH protocol in Murphi\label{sec:formalDescription}}
 %=========================================
-A formal protocol model includes a set of parameterized transition rules and properties.  Here we adopt a version of FLASH protocol similar to that in \cite{cubeicBeyond}, which is different from the version in \cite{Chou2004}. The difference between them lies in the modeling of behaviors of a Home node. Behaviours of the Home node is not identical to those of the other nodes while behaviors of
+A formal protocol model includes a set of parameterized transition rules and properties.  Here we adopt a version of the FLASH protocol similar to that in \cite{cubeicBeyond}, which is different from the version in \cite{Chou2004}. The difference between them lies in the modeling of behaviors of a Home node. Behaviours of the Home node is not identical to those of the other nodes while behaviors of
  a non-Home node are identical to those of the other non-Home node. In the model of work in \cite{Chou2004}, state variables of the Home node and non-Home nodes are both array-variables. This modeling has a shortage of destroying the symmetry between indices which represents identifiers for agents.
 
 In our modeling, the symmetry between indices should be preserved and will be used in {\sf paraVerifier}. Namely,  %a  state variable $a$ on non-Home nodes are stored in array-variables.
 some parameterized variable $a[i]$ records some state  $a$ of node $i$. Home is not an explicit index to reference a node in our model. State variable
   $a$ of the Home node  is recorded as a global  (or non-parameterized) variable $Homea$. %Index variable $v$ to represent some index of a node is only for non-Home nodes. We explicitly introduce an extra variable $Homev$ to identify the case when the node index should be $Home$.
- Being consistent with the above philosophy, our FLASH protocol in Murphi is changed accordingly. For instance, we compare the original version in \cite{Chou2004}, which is shown in (a), with our version, which is shown in (b):
+ Being consistent with the above philosophy, our the FLASH protocol in Murphi is changed accordingly. For instance, we compare the original version in \cite{Chou2004}, which is shown in (a), with our version, which is shown in (b):
 
 %\forget{
 %\vspace{-5pt}
@@ -563,36 +564,36 @@ invariant "MemDataProp"\\
 The former two properties are the mutual-exclusion properties between  cache state status of two nodes. The last is the  data property.
 
 %=========================================
-\section{Verifying FLASH protocol by {\sf paraVerifer} \label{sec:experiments}}
+\section{Verifying the FLASH protocol by {\sf paraVerifer} \label{sec:experiments}}
 \paragraph{An obstacle of generating an SMV-oracle and its solution}
-For cache coherence protocols like MESI or German protocols with small scales,   {\sf paraVerifier}  is easy to use to verify automatically them. \bedt{A model written in Murphi language} is provided as a formal model, which contains both the protocol and properties under verification. The Murphi model will be automatically transformed into not only an internal model but also an SMV-model. NuSMV will \bedt{be used as the model checking engine} and be called to compute the reachable set of the SMV-model. The internal model will be used by the {\sf invFinder} to generate auxiliary invariants. During this generation procedure, a set of candidate invariant formulas are generated in one step, and only one is chosen  if it is an invariant by checking the reachable set of   SMV-model. The oracle of the SMV-model is automatically generated inside the {\sf inVfinder} without human intervention.
+For cache coherence protocols like MESI or German protocols with small scales,   {\sf paraVerifier}  is easy to use to verify them automatically. \bedt{A model written in Murphi language} is provided as a formal model, which contains both the protocol and properties under verification. The Murphi model will be automatically transformed into not only an internal model but also an SMV-model. NuSMV will \bedt{be used as the model checking engine} and be called to compute the reachable set of the SMV-model. The internal model will be used by the {\sf invFinder} to generate auxiliary invariants. During this generation procedure, a set of candidate  formulas are generated in one step, and only one is chosen  if it is an invariant by checking the reachable set of   SMV-model. The oracle of the SMV-model is automatically generated inside the {\sf invFinder} without human intervention.
 
-However, FLASH protocol with data path is a real world protocol with industry scale. For a FLASH protocol   instance configuration size NODENUM=3 and DATANUM=2, the protocol is so complex that NuSMV can't compute the reachable state set of the SMV-model which is generated by {\sf invFinder} in a computing server  with 32 Inter Xeon processors, 384 GB memory. In fact, this problem of  state explosion is the main obstacle to the applying previous automatic solutions such as \cite{Arons2001,Lv2007} to the parameterized verification of FLASH protocol. For instance, a reachable state set of a protocol instance of FLASH protocol is needed in both the work in \cite{Arons2001,Lv2007}. The former needs the reachable state set to compute the so-called ``invisible inductive invariants" for deductive theorem proving. The latter needs it to strengthen
- the guards of rule for a counter-example guided refinement of an abstract protocol. Due to the non-availability of the necessary the reachable state set of a proper instance of FLASH protocol, the above two approaches both fail.
+However, the FLASH protocol with data path is a real world protocol with industry scale. For a FLASH protocol   instance configuration size NODENUM=3 and DATANUM=2, the protocol is so complex that NuSMV can't compute the reachable state set of the SMV-model which is generated by {\sf invFinder} in a computing server  with 32 Intel Xeon processors, 384 GB memory. In fact, this problem of  state explosion is the main obstacle to the application of previous automatic solutions such as \cite{Arons2001,Lv2007} to the parameterized verification of the FLASH protocol. For instance, a reachable state set of a protocol instance of the FLASH protocol is needed in both the work in \cite{Arons2001,Lv2007}. The former needs the reachable state set to compute the so-called ``invisible inductive invariants" for deductive theorem proving. The latter needs it to strengthen
+ the guards of rules for a counter-example guided refinement of an abstract protocol. Due to the non-availability of the necessary   reachable state set of a proper instance of the FLASH protocol, the above two approaches both fail.
 
- In order to overrun the obstacle of oracles, {\sf invFinder} provides techniques of simplifying protocols and hybrid oracles. For a complex protocol, a smv-model of a  simplified version of this protocol can be used as an external oracle to verify the guessed candidate formulas. For FLASH protocol with data paths,  we construct a SMV -model of a simplified version of the FLASH protocol without data paths, and use NuSMV to enumerate its reachable state set to judge a candidate invariant formula. Here we  emphasize that the reachable state set of the simplified FLASH protocol  instance  with configuration size NODENUM=3 can be enumerated by the NuSMV in the aforementioned computing server. This oracle is enough for the {\sf invFinder} to find all the invariant formulas on control variables (or without data properties).
+ In order to overrun the obstacle of oracles, {\sf invFinder} provides techniques of simplifying protocols and hybrid oracles. For a complex protocol, a SMV-model of a  simplified version of this protocol can be used as an external oracle to verify the guessed candidate formulas. For the FLASH protocol with data paths,  we construct a SMV -model of a simplified version of the FLASH protocol without data paths, and use NuSMV to enumerate its reachable state set to judge a candidate invariant formula. Here we  emphasize that the reachable state set of the simplified FLASH protocol  instance  with configuration size NODENUM=3 can be enumerated by the NuSMV in the aforementioned computing server. This oracle is enough for the {\sf invFinder} to find all the invariant formulas on control variables (or without data properties).
 
- However, if a candidate invariant formula in which data variables occurring, how does {\sf invFinder} deal with it?  For instance, ((Sta.Dir.Dirty = FALSE) \& (!(Sta.MemData = Sta.CurrData))) can't be judged via the SMV -model of a simplified version of the FLASH protocol without data paths. At this time, a hybrid oracle will be used.  A full protocol instance in Murphi  with configuration size NODENUM=3 ana DATANUM=2 \bedt{is built}, and  Murphi \bedt{tool} is run to judge the formula containing data variables. Here we adopt an \bedt{heuristic} strategy: \bedt{if Murphi tool has been running to check the property up to a time-out,} and no counter-example is found, then the checked formula will be regarded for an invariant.
+ However, if  data variables occurs in a candidate formula, how does {\sf invFinder} deal with it?  For instance, ((Sta.Dir.Dirty = FALSE) \& (!(Sta.MemData = Sta.CurrData))) can't be judged via the SMV -model of a simplified version of the FLASH protocol without data paths. At this time, a hybrid oracle will be used.  A full protocol instance in Murphi  with configuration size $\mathrm{NODENUM}=3$ and $\mathrm{DATANUM}=2$ \bedt{is built}, and  Murphi \bedt{tool} is run to judge the formula containing data variables. Here we adopt a \bedt{heuristic} strategy: \bedt{if Murphi tool has been running to check the property up to a time-out,} and no counter-example is found, then the checked formula will be regarded as an invariant.
 
  The \bedt{heuristic} may introduce a false invariant, which leads to a doubt of the soundness of our method.  Intuitively, a  false invariant holds at any   state which either occurs in the reachable state set of the SMV-model or in a state traversed by Murphi. But it may not hold at a state of a protocol instance which is not in the aforementioned reachable state sets. Here we emphasize that the ultimate correctness is guaranteed by the theorem proving process of the generated proof script in Isabelle. If such a false invariant is generalized and occurs in the parameterized invariant set, the generated proof script can't be passed in Isabelle.
 
 \vspace{-10pt}
-\paragraph{Verifying \bedt{procedure}}  In order to verify FLASH protocol by {\sf paraVerifier} under Linux system, some simple steps are needed.
+\paragraph{Verifying \bedt{procedure}}  In order to verify the FLASH protocol by {\sf paraVerifier} under Linux system, some simple steps are needed.
 
 \begin{enumerate}[noitemsep,nolistsep]
-\item The Murphi model of FLASH protocol is converted to its corresponding internal model by compiler {\sf murphi2ocaml}.
+\item The Murphi model of the FLASH protocol is converted to its corresponding internal model by compiler {\sf murphi2ocaml}.
 \item The specific verifier for FLASH protocol with OCaml is built. Furthermore, the generated executable file is  executed on a server while a model checking engine for NuSMV oracle and a model checking engine for Murphi oracle are executed on other servers respectively. Afterwards, a directory containing proof scripts will be generated.
 \item The proof scripts in Isabelle is then executed.
 \end{enumerate}
 
 \forget{
-Firstly, we convert Murphi model of FLASH protocol to its corresponding internal model by compiler {\sf murphi2ocaml} supposing that the compiler was put in path {\sf\$\{moc\}}.
+Firstly, we convert Murphi model of the FLASH protocol to its corresponding internal model by compiler {\sf murphi2ocaml} supposing that the compiler was put in path {\sf\$\{moc\}}.
 
 \begin{specification}
   \$ python \$\{moc\}/gen.py -m flash.m > flash.ml
 \end{specification}
 
-Secondly, we build the specific verifier for FLASH protocol with OCaml and run the generated executable file supposing that address of the NuSMV oracle was {\sf vserv} and address of the Murphi oracle was {\sf mserv}. Afterwards, a directory named {\sf n\_flash} where proof scripts were put will be generated.
+Secondly, we build the specific verifier for the FLASH protocol with OCaml and run the generated executable file supposing that address of the NuSMV oracle was {\sf vserv} and address of the Murphi oracle was {\sf mserv}. Afterwards, a directory named {\sf n\_flash} where proof scripts were put will be generated.
 
 \begin{specification}
   corebuild flash.byte -pkg re2 -I src\\
@@ -617,7 +618,7 @@ We run {\sf paraVerifier} on a client with 4 Intel Xeon processors, 8 GB memory 
 \begin{table}[!htbp]
   \centering
   \footnotesize
-   \caption{Verification Result on FLASH protocol}
+   \caption{Verification Result on the FLASH protocol}
   \label{tab:flashRes}
   \vspace{-5pt}
   \begin{tabular}{|c|c|}
@@ -678,18 +679,18 @@ From these invariants, we can know when the control state variable Sta.Dir.Pendi
 \begin{itemize}
  \item Invariant 44 means that the Home node is fetching a data from some node to read, thus {\tt (Sta.HomeUniMsg.Cmd = uni\_get)}, so the pending flag is  TRUE to block another new READ-WRITE request.
  \item Invariants 52, 53, and 57 can be analyzed similarly.
- \item In invariant 59, {\tt (Sta.UniMsg[1].Cmd = uni\_get) \& (Sta.UniMsg[1].Home} {\tt Proc = FALSE)} means that node 1 has request a shared copy and been granted to fetch the copy from some node, thus Sta.UniMsg[1].HomeProc = FALSE, the pending flag is set TRUE to block another new READ-WRITE requests.
+ \item In invariant 59, {\tt (Sta.UniMsg[1].Cmd = uni\_get) \& (Sta.UniMsg[1].Home} {\tt Proc = FALSE)} means that node 1 has requested a shared copy and been granted to fetch the copy from some node, thus Sta.UniMsg[1].HomeProc = FALSE, the pending flag is set to TRUE to block another new READ-WRITE requests.
   \item    Invariant 74 has a similar meaning while the request is for WRITE operation.
 
   \item    Invariant 88 specifies that node 2 performs a write-request, thus {\tt Sta.UniMsg} {\tt[2].Cmd = uni\_putx}, and the data is shared by node 1, then the shared copy in node 1 is invalidated, thus (Sta.Dir.InvSet[1] = TRUE), at this time,  the pending flag is set TRUE to block another new READ-WRITE request.
 
   \item   Invariants 91 and 92 says that this flag is set during sharing write-back procedure. Invariants 111  that this flag is set during the nakc procedure when  Sta.NakcMsg.Cmd = NAKC\_Nakc.
 
-   \item     Invariants 114 that the flag is set during the invalidating procedure to an old shared-copy store in node 1. The invalidating procedure is a sub-procedure  of a WRITE request from any other node. In 134, {\tt Sta.Proc[2].CacheState = cache\_e} shows that the WRITE request is from node 2, and CacheState of node 2 changes to exclusive even before node 1 has not been invalidated. From this, we can see that the version we verify is an eager-mode.
+   \item     Invariants 114 states that the flag is set during the invalidating procedure to an old shared-copy store in node 1. The invalidating procedure is a sub-procedure  of a WRITE request from any other node. In 134, {\tt Sta.Proc[2].CacheState = cache\_e} shows that the WRITE request is from node 2, and CacheState of node 2 changes to exclusive even before node 1 has not been invalidated. From this, we can see that the version we verify is an eager-mode.
 
    \item       Invariant 153 that Sta.Dir.Pending is set during a write-back procedure.
 
-  \item  The last one says that if there is a  local shared copy in the Home node, Sta.Dir.Pending is FALSE because the   requests can be processed at once, thus, the system need not be pend.
+  \item  The last one says that if there is a  local shared copy in the Home node, Sta.Dir.Pending is FALSE because the   requests can be processed at once, thus, the system need not be pending.
 \end{itemize}
 Not only auxiliary invariants are searched, but also causal relations between   invariants and  rules are searched. A fragment on the rule {\tt NI\_Remote\_PutX} and invariant {\tt inv1= !((Sta.Proc[2].CacheState = cache\_e) \& (Sta.Proc[1].\ \\CacheState = cache\_e))} is shown as below:\\
 %table.%=========================================%\subsection{ Parameterized Proof Script}%=========================================
@@ -720,7 +721,7 @@ rel: 3invHoldForRule3-inv4:!((Sta.Proc[1].CacheState = cache\_e) \& \\(Sta.UniMs
 %\end{minipage}
 
 \vspace{-10pt}
-\paragraph{Parameterized Proof Script} There are concrete invariants and causal relations, where each  index is a concrete one such as 1 and 2, etc. {\tt proofGen} generalizes these into an N-parameterized form, where each index is symbolic such as $i1$ and $i2$ and $N$ is also symbolic. An Isabelle proof script is  generated by {\tt proofGen}, where an N-parameterized instance of FLASH protocol is modeled   and the properties are formally proved. The Hierarchy of the lemmas is illustrated in Fig. \ref{fig:lemmaHierachy}. %$A \rightarrow B$ means that the proof of lemma $A$ needs applying lemma $B$.
+\paragraph{Parameterized Proof Script} There are concrete invariants and causal relations, where each  index is a concrete one such as 1 and 2, etc. {\tt proofGen} generalizes these into an N-parameterized form, where each index is symbolic such as $i1$ and $i2$ and $N$ is also symbolic. An Isabelle proof script is  generated by {\tt proofGen}, where an N-parameterized instance of the FLASH protocol is modeled   and the properties are formally proved. The Hierarchy of the lemmas is illustrated in Fig. \ref{fig:lemmaHierachy}. %$A \rightarrow B$ means that the proof of lemma $A$ needs applying lemma $B$.
 
 
 %\vspace{-20pt}
@@ -797,7 +798,7 @@ In detail, the proof script is divided into   parts as follows:
 
 \item[8] A lemma {\tt on\_inits} proves that  all invariants hold at the initial state. % of the protocol.
 
-\item[9] Main theorem  applying the consistency lemma to prove that any invariant formula  hods at any reachable state of the  N-parameterized FLASH protocol instance.
+\item[9] Main theorem  applying the consistency lemma to prove that any invariant formula  holds at any reachable state of the  N-parameterized FLASH protocol instance.
 \end{enumerate}
 
 
@@ -859,7 +860,7 @@ In order to understand state transitions of the flow in Fig. \ref{fig:arch} afte
 \item inv\_\_13 says that Sta.ShWbMsg.Data must be the same as Sta.CurrData because $dst$ conveys the dirty data when it issues the  shwb\_shwb command in executing rule NI\_Remote\_Get\_Put.
 \item At the same time, $dst$ also sets its copy to shared state, thus, there is no an exclusive copy. This specified by inv\_\_21 and inv\_\_26.
 \item Because   $src$ is a remote node, Sta.ShWbMsg.HomeProc is set FALSE. This is formalized by inv\_\_29.
-\item Because  a sharing write-back occurs in an READ-transaction, and others' requests are pended to be processed, there will be no any uni\_putx command  to grant a node's WRITE-request. This formalized by inv\_\_34 and inv\_\_43.
+\item Because  a sharing write-back occurs in a READ-transaction, and others' requests are pended to be processed, there will be no any uni\_putx command  to grant a node's WRITE-request. This formalized by inv\_\_34 and inv\_\_43.
 \item Home node itself will not grant its local WRITE-request, thus Sta.HomeUni-Msg.Cmd  can't be  uni\_getx. Due to the pending status, thus replacement to the exclusive copy and invalidating operation to shared nodes can't occur, thus Sta.WbMsg.Cmd can't be wb\_wb, Sta.NakcMsg.Cmd can't be nakc\_nakc, and Sta.Dir.InvSet tag to any node can't be TRUE. These are formalized by inv\_\_56, inv\_\_76, and inv\_\_102.
 \item A sharing write-back occurs when Home node find that there is a remote and dirty copy, therefore, Sta.Dir.Dirty must be TRUE and Sta.Dir.Local must be FALSE. This is formalized by inv\_\_42 and inv\_\_49.
 \item A dirty copy also means that no any other node shares this data, thus Sta.Dir.ShrSet of any node is set FALSE. This is formalized by inv\_\_75.
@@ -893,16 +894,16 @@ inv\_\_135: !((Sta.Dir.HeadVld = FALSE) \& (Sta.ShWbMsg.Cmd = shwb\_shwb))\\
 inv\_\_146: !((Sta.Dir.HomeHeadPtr = TRUE) \& (Sta.ShWbMsg.Cmd = shwb\_shwb))\\
 \end{specification}
 \forget{
-inv\_\_13 says that Sta.ShWbMsg.Data must be the same as Sta.CurrData because $dst$ conveys the dirty data when it issues the  shwb\_shwb command in executing rule NI\_Remote\_Get\_Put. At the same time, $dst$ also sets its copy to shared state, thus, there is no an exclusive copy. This specified by inv\_\_21 and inv\_\_26. Because   $src$ is a remote node, Sta.ShWbMsg.HomeProc is set FALSE. This is formalized by inv\_\_29. Because  a sharing write-back occurs in an READ-transaction, and others' requests are pended to be processed, there will be no any uni\_putx command  to grant a node's WRITE-request. This formalized by inv\_\_34 and inv\_\_43. Home node itself will not grant its local WRITE-request, thus Sta.HomeUniMsg.Cmd  can't be  uni\_getx. Due to the pending status, thus replacement to the exclusive copy and invalidating operation to shared nodes can't occur, thus Sta.WbMsg.Cmd can't be wb\_wb, Sta.NakcMsg.Cmd can't be nakc\_nakc, and Sta.Dir.InvSet tag to any node can't be TRUE. These are formalized by inv\_\_56, inv\_\_76, and inv\_\_102.  A sharing write-back occurs when Home node find that there is a remote and dirty copy, therefore, Sta.Dir.Dirty must be TRUE and Sta.Dir.Local must be FALSE. This is formalized by inv\_\_42 and inv\_\_49. A dirty copy also means that no any other node shares this data, thus Sta.Dir.ShrSet of any node is set FALSE. This is formalized by inv\_\_75.  At the same time, Sta.Dir.HeadVld has been set TRUE and Sta.Dir.HomeHeadPtr has been set to $dst$. This formalized by inv\_\_135 and inv\_\_146 respectively.  Sta.UniMsg[src].Cmd  is set uni\_put after the rule NI\_Remote\_Get\_Put, therefore, when (Sta.UniMsg[src].HomeProc = FALSE \&Sta.ShWbMsg.Cmd = shwb\_shwb), Sta.UniMsg[src].Cmd can't be uni\_get, thus inv\_\_101 holds for src. For other node $src'$ than src, its UniMsg[$src'$].HomeProc flag is initialized by TRUE,  thus inv\_\_101 holds for $src'$.
+inv\_\_13 says that Sta.ShWbMsg.Data must be the same as Sta.CurrData because $dst$ conveys the dirty data when it issues the  shwb\_shwb command in executing rule NI\_Remote\_Get\_Put. At the same time, $dst$ also sets its copy to shared state, thus, there is no an exclusive copy. This specified by inv\_\_21 and inv\_\_26. Because   $src$ is a remote node, Sta.ShWbMsg.HomeProc is set FALSE. This is formalized by inv\_\_29. Because  a sharing write-back occurs in a READ-transaction, and others' requests are pended to be processed, there will be no any uni\_putx command  to grant a node's WRITE-request. This formalized by inv\_\_34 and inv\_\_43. Home node itself will not grant its local WRITE-request, thus Sta.HomeUniMsg.Cmd  can't be  uni\_getx. Due to the pending status, thus replacement to the exclusive copy and invalidating operation to shared nodes can't occur, thus Sta.WbMsg.Cmd can't be wb\_wb, Sta.NakcMsg.Cmd can't be nakc\_nakc, and Sta.Dir.InvSet tag to any node can't be TRUE. These are formalized by inv\_\_56, inv\_\_76, and inv\_\_102.  A sharing write-back occurs when Home node find that there is a remote and dirty copy, therefore, Sta.Dir.Dirty must be TRUE and Sta.Dir.Local must be FALSE. This is formalized by inv\_\_42 and inv\_\_49. A dirty copy also means that no any other node shares this data, thus Sta.Dir.ShrSet of any node is set FALSE. This is formalized by inv\_\_75.  At the same time, Sta.Dir.HeadVld has been set TRUE and Sta.Dir.HomeHeadPtr has been set to $dst$. This formalized by inv\_\_135 and inv\_\_146 respectively.  Sta.UniMsg[src].Cmd  is set uni\_put after the rule NI\_Remote\_Get\_Put, therefore, when (Sta.UniMsg[src].HomeProc = FALSE \&Sta.ShWbMsg.Cmd = shwb\_shwb), Sta.UniMsg[src].Cmd can't be uni\_get, thus inv\_\_101 holds for src. For other node $src'$ than src, its UniMsg[$src'$].HomeProc flag is initialized by TRUE,  thus inv\_\_101 holds for $src'$.
 }
 \vspace{-10pt}
 \section{Conclusion and Future Work\label{sec:conclusion}}
 %=========================================
-\bedt{Safety or Security critical computer system, such as nuclear plant control system or trusted operating system, usually have the requirements of formal proof, rather than verification. These systems are often parameterized systems.} Our case study on FLASH protocol is a  typically successful \bedt{parameterized verification} of {\sf paraVerifier} which combines model checking and theorem proving. The consistency lemma basing on the induction approach is the
+\bedt{Safety or Security critical computer system, such as nuclear plant control system or trusted operating system, usually have the requirements of formal proof, rather than verification. These systems are often parameterized systems.} Our case study on the FLASH protocol is a  typically successful \bedt{parameterized verification} of {\sf paraVerifier} which combines model checking and theorem proving. The consistency lemma basing on the induction approach is the
 core of our work, which gives the heuristics to guide the tool
- to construct candidate invariants. By using NuSMV or Murphi to model check  candidate invariants, true invariants are  chosen.  By generalizing the invariants into a parameterized form, {\sf paraVerifier} generates automatically a proof script to  prove the protocol. Again, the consistency lemma is used as a main theorem to prove all the invariants. Searching invariants and proof generation are both automatic. The ultimate correctness is guaranteed by a mechanical proof in a theorem prover. Therefore, we \bedt{achieve} the two goals set up in Section \ref{sec:introduction}: verifying FLASH protocol in both an automatic and rigorous way.
+ to construct candidate invariants. By using NuSMV or Murphi to model check  candidate invariants, true invariants are  chosen.  By generalizing the invariants into a parameterized form, {\sf paraVerifier} generates automatically a proof script to  prove the protocol. Again, the consistency lemma is used as a main theorem to prove all the invariants. Searching invariants and proof generation are both automatic. The ultimate correctness is guaranteed by a mechanical proof in a theorem prover. Therefore, we \bedt{achieve} the two goals set up in Section \ref{sec:introduction}: verifying the FLASH protocol in both an automatic and rigorous way.
 
- Compared with previous work, \bedt{these easily readable invariants in our work establish ``a chain of evidence'' for the correctness proof.} As we have discussed in Section \ref{sec:experiments} and \ref{sec:relatingWithFlow}, these invariants have shed light on the semantics of FLASH protocol. Both functions of control variables and synchronization of executing rules of different  READ-WRITE transactions. In this sense,  our understanding  is the most profound by using {\sf paraVerifier} to verify it. In fact, these invariants can be regarded as axiom semantics of FLASH protocol. %Intuitively we We have control variables and .It is also interesting to relate our approach to previous work?
+ Compared with previous work, \bedt{these easily readable invariants in our work establish ``a chain of evidence'' for the correctness proof.} As we have discussed in Section \ref{sec:experiments} and \ref{sec:relatingWithFlow}, these invariants have shed light on the semantics of the FLASH protocol. Both functions of control variables and synchronization of executing rules of different  READ-WRITE transactions. In this sense,  our understanding  is the most profound by using {\sf paraVerifier} to verify it. In fact, these invariants can be regarded as axiom semantics of FLASH protocol. %Intuitively we We have control variables and .It is also interesting to relate our approach to previous work?
 
  In the future, we want to extend our work in the following two directions: (1) We want to automate the CMP-method in \cite{Chou2004} by adopting our invariants. We believe that our invariant should be enough to strengthen   guards of the rules of the abstract node; (2) We want to relate the predicate-abstraction with our work. By assigning proper predicates, we can construct the abstract version of the protocol, which can be regarded as a specification of the protocol. The original FLASH protocol is regarded as the implementation of the specification. Our invariants should be very useful in proving the refinement between the implementation and specification.
 
