@@ -84,7 +84,7 @@
 \begin{document}
 
 \title{ Verification Report  of FLASH Cache Coherence Protocol by Using Paraverifier}
- 
+
 
 \maketitle
 
@@ -328,7 +328,7 @@ Its is very desirable for people to have some flow-charts each of  which is a se
 
 
 %\subsection{A Flow Chart}
-\paragraph*{A Flow Chart} Formally, a transaction flow is a structure, which can be formalized by a pair $<R \times N, \rightarrow \cup \Rightarrow>$, where $(r,i) \in R \times N$ is a  node, indicating that a client $i$ performs an action of executing a rule $r$. Relations  $\rightarrow$  and $\Rightarrow$ are two   orders over $R \times N$. $(r_1,i_1) \rightarrow (r_2,i_2) \equiv \exists v~e. (v:=e) \in \mathsf{act}(r_1) \land (v=e) \in decompose(guard(r_2))$. Here $v:=e$ is an assignment; $\mathsf{act}$ is the set of assignments of an action of a rule; A formula $f$ in conjunction form can be composed of a set of sub-formulas $f_i$, denoted as $decompose(f)$, such that each $f_i$  is not of a conjunction form and $f$ is semantically equivalent to $f_1 \land f_2 \land ... \land f_N$. Intuitively $(r_1,i_1) \rightarrow (r_2,i_2)$ means that the triggering of agent $i_2$ executing $r_2$ needs the completion of agent $i_1$ executing $r_1$; $(r_1,i_1) \Rightarrow (r_2,i_1)$ means that agent $i_1$'s action of executing $r_2$ follows the completion of  executing $r_1$. A classical three-hop flow case of an READ-transaction including a sharing-write back is shown as follows:
+\paragraph*{A Flow Chart} Formally, a transaction flow is a well-founded graph, which can be formalized by a pair $<R \times N, \rightarrow \cup \Rightarrow>$, where $(r,i) \in R \times N$ is a  node, indicating that a client $i$ performs an action of executing a rule $r$. Relations  $\rightarrow$  and $\Rightarrow$ are two kinds of edges over $R \times N$. This kind of well-founded graph is similar to the bundle which is used to formalise a protocol execution in security protocol \cite{}. using $(r_1,i_1) \rightarrow (r_2,i_2) \equiv \exists v~e. (v:=e) \in \mathsf{act}(r_1) \land (v=e) \in decompose(guard(r_2))$. Here $v:=e$ is an assignment; $\mathsf{act}$ is the set of assignments of an action of a rule; A formula $f$ in conjunction form can be composed of a set of sub-formulas $f_i$, denoted as $decompose(f)$, such that each $f_i$  is not of a conjunction form and $f$ is semantically equivalent to $f_1 \land f_2 \land ... \land f_N$. Intuitively $(r_1,i_1) \rightarrow (r_2,i_2)$ means that the triggering of agent $i_2$ executing $r_2$ needs the completion of agent $i_1$ executing $r_1$; $(r_1,i_1) \Rightarrow (r_2,i_1)$ means that agent $i_1$'s action of executing $r_2$ follows the completion of  executing $r_1$. A classical three-hop flow case of an READ-transaction including a sharing-write back is shown as follows:
 
 \vspace{-20pt}
 \begin{figure}[htbp]

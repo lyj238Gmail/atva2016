@@ -83,18 +83,8 @@
 %=========================================
 \begin{document}
 
-\title{  An Automatic Parameterized Verification of  FLASH Cache Coherence Protocol by Paraverifier}
-\titlerunning{paraVerifier: An Invariant Finder}
-\author{Yongjian Li \inst{1} \and
-        Kaiqiang Duan \inst{1} \and
-       % Shaowei Cai \inst{1} \and
-        Yi Lv \inst{1} }
-\authorrunning{Li et al.}
-\institute{
-State Key Laboratory of Computer Science,
-%Institute of Software,
-Chinese Academy of Sciences
-}
+\title{ Verification Report  of FLASH Cache Coherence Protocol by Using Paraverifier}
+ 
 
 \maketitle
 
